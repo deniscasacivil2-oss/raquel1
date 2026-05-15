@@ -134,6 +134,34 @@
             <!-- SEÇÃO: VISÃO GERAL -->
             <section id="sec-visao-geral" class="section-content active">
                 <div class="max-w-7xl mx-auto space-y-6">
+                    
+                    <!-- NOVO CARD: DIRETRIZES E PRAZO -->
+                    <div class="card p-5 sm:p-6 border-l-4 border-amber-500 bg-amber-50/60 shadow-sm relative overflow-hidden">
+                        <div class="absolute -right-4 -top-4 opacity-5">
+                            <i class="fa-solid fa-triangle-exclamation text-9xl text-amber-700"></i>
+                        </div>
+                        <div class="relative z-10">
+                            <h3 class="text-base sm:text-lg font-black text-amber-900 uppercase tracking-wider mb-4 flex items-center gap-2">
+                                <i class="fa-regular fa-clock text-amber-600"></i> Prazo de Entrega Fatal: 08/06/2026
+                            </h3>
+                            <div class="text-xs sm:text-sm text-amber-900 space-y-3">
+                                <p class="font-bold">Atenção às regras de submissão documental do TCESP:</p>
+                                <ul class="list-none space-y-2">
+                                    <li class="flex gap-2 items-start"><i class="fa-solid fa-check text-amber-600 mt-0.5"></i> <span><strong>Formatos exigidos:</strong> PDF pesquisável e arquivos assinados eletronicamente (extensão <code class="bg-amber-200/60 px-1 rounded text-amber-900 font-bold border border-amber-300">.p7s</code>).</span></li>
+                                    <li class="flex gap-2 items-start"><i class="fa-solid fa-check text-amber-600 mt-0.5"></i> <span><strong>Canal de Envio:</strong> E-mail para <a href="mailto:lhcosta@tce.sp.gov.br" class="font-bold underline hover:text-amber-700 transition-colors">lhcosta@tce.sp.gov.br</a> ou inseridos no <strong>OneDrive do TCESP</strong> (solicitar link de acesso).</span></li>
+                                    <li class="flex gap-2 items-start"><i class="fa-solid fa-check text-amber-600 mt-0.5"></i> <span><strong>Tamanho Máximo:</strong> 5MB por arquivo. Caso ultrapasse, divida o arquivo (Ex: Parte 1, Parte 2).</span></li>
+                                    <li class="flex gap-2 items-start"><i class="fa-solid fa-check text-amber-600 mt-0.5"></i> <span><strong>Nomenclatura Padrão:</strong> Nomear cada arquivo conforme o item que atende. Exemplos: <br>
+                                        <div class="flex flex-wrap gap-2 mt-1.5">
+                                            <span class="inline-block bg-amber-100/80 px-2 py-1 rounded font-mono text-[10px] sm:text-xs border border-amber-200">“01 – Lei nº 123.pdf”</span>
+                                            <span class="inline-block bg-amber-100/80 px-2 py-1 rounded font-mono text-[10px] sm:text-xs border border-amber-200">“01 – Lei nº 123.p7s”</span>
+                                        </div>
+                                    </span></li>
+                                    <li class="flex gap-2 items-start"><i class="fa-solid fa-check text-amber-600 mt-0.5"></i> <span><strong>Obrigatoriedade Total:</strong> Responder cada item separadamente, ainda que de forma negativa (fornecer declaração negativa conforme o caso).</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
                         <div onclick="abrirDetalhesKpi('total')" class="card p-5 border-l-4 border-slate-800 bg-white cursor-pointer hover:shadow-md transition-all hover:-translate-y-0.5">
                             <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Total de Requisitos</p>
@@ -243,8 +271,8 @@
             { id: "Item 6", eixo: "Planejamento e Controle Interno", submenu: "Obras Paralisadas e Atrasadas (Item 6)", desc: "Módulo tabular e de preenchimento para as obras afetadas em 2025", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "tabela", dados: "" },
 
             // 2. Gestão Financeira e Contábil
-            { id: "2.1", eixo: "Gestão Financeira e Contábil", submenu: "Tesouraria e Bancos", desc: "Relação de todas as contas (ativas/inativas)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "2.2", eixo: "Gestão Financeira e Contábil", submenu: "Tesouraria e Bancos", desc: "Extratos bancários e conciliações (Dezembro/2025)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 34", eixo: "Gestão Financeira e Contábil", submenu: "Tesouraria e Bancos", desc: "Relação de todas as contas ativas ou inativas, cópia dos extratos e conciliações (Dez/2025)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 35", eixo: "Gestão Financeira e Contábil", submenu: "Tesouraria e Bancos", desc: "Processos relacionados a adiantamentos e diárias (Matrículas: 5647, 7482, 5823 e 7484)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
             { id: "2.3", eixo: "Gestão Financeira e Contábil", submenu: "Tesouraria e Bancos", desc: "Depósitos Judiciais (LC 151/15): Saldo, conta razão, extratos e aplicação", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
             { id: "2.4", eixo: "Gestão Financeira e Contábil", submenu: "Receita e Dívida Ativa", desc: "Saldos da Dívida Ativa (2024 vs 2025)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
             { id: "2.5", eixo: "Gestão Financeira e Contábil", submenu: "Receita e Dívida Ativa", desc: "Relatório de atualizações, inscrições e cancelamentos (prescrição)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
@@ -303,9 +331,7 @@
 
         // DADOS DAS TABELAS (Mock inicial baseados nos JSONs/Estruturas)
         const dadosTabelas = {
-            "Item 6": [
-                { obra_id: "OBR-001", descricao_obra: "Reforma UBS Central", contratada: "Construtora Alfa", valor_inicial_contrato: "1.200.000,00", valor_aditado: "0,00", valor_total_pago: "500.000,00", data_paralisacao: "15/08/2025", motivo_paralisacao_atraso: "Atraso no repasse estadual", providencias_regularizacao: "Notificação oficial" }
-            ],
+            "Item 6": [], // Removido mock. Aguarda preenchimento pelo município.
             "Item 40": [
                 { cod: "5447", cargo: "Assessor Executivo", nome: "Carlos Henrique Vasconcelos", dtNom: "05/01/2025", dtExo: "-", lei: "Lei Municipal nº 3.450/2020" }
             ],
@@ -756,7 +782,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                ${linhas}
+                                ${linhas || `<tr><td colspan="8" class="p-6 text-center text-slate-500 text-xs font-medium bg-slate-50/50"><i class="fa-solid fa-folder-open text-slate-300 text-2xl block mb-2"></i>Nenhum dado inserido. Aguardando preenchimento do município.</td></tr>`}
                             </tbody>
                         </table>
                     </div>
