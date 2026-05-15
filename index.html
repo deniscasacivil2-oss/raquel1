@@ -5,15 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel TC-006641.989.24 - Olímpia</title>
     
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
@@ -135,7 +129,6 @@
             <section id="sec-visao-geral" class="section-content active">
                 <div class="max-w-7xl mx-auto space-y-6">
                     
-                    <!-- Card de Diretrizes -->
                     <div class="card p-5 sm:p-6 border-l-4 border-amber-500 bg-amber-50/60 shadow-sm relative overflow-hidden">
                         <div class="absolute -right-4 -top-4 opacity-5">
                             <i class="fa-solid fa-triangle-exclamation text-9xl text-amber-700"></i>
@@ -147,16 +140,9 @@
                             <div class="text-xs sm:text-sm text-amber-900 space-y-3">
                                 <p class="font-bold">Atenção às regras de submissão documental do TCESP:</p>
                                 <ul class="list-none space-y-2">
-                                    <li class="flex gap-2 items-start"><i class="fa-solid fa-check text-amber-600 mt-0.5"></i> <span><strong>Formatos exigidos:</strong> PDF pesquisável e arquivos assinados eletronicamente (extensão <code class="bg-amber-200/60 px-1 rounded text-amber-900 font-bold border border-amber-300">.p7s</code>).</span></li>
-                                    <li class="flex gap-2 items-start"><i class="fa-solid fa-check text-amber-600 mt-0.5"></i> <span><strong>Canal de Envio:</strong> E-mail para <a href="mailto:lhcosta@tce.sp.gov.br" class="font-bold underline hover:text-amber-700 transition-colors">lhcosta@tce.sp.gov.br</a> ou inseridos no <strong>OneDrive do TCESP</strong> (solicitar link de acesso).</span></li>
-                                    <li class="flex gap-2 items-start"><i class="fa-solid fa-check text-amber-600 mt-0.5"></i> <span><strong>Tamanho Máximo:</strong> 5MB por arquivo. Caso ultrapasse, divida o arquivo (Ex: Parte 1, Parte 2).</span></li>
-                                    <li class="flex gap-2 items-start"><i class="fa-solid fa-check text-amber-600 mt-0.5"></i> <span><strong>Nomenclatura Padrão:</strong> Nomear cada arquivo conforme o item que atende. Exemplos: <br>
-                                        <div class="flex flex-wrap gap-2 mt-1.5">
-                                            <span class="inline-block bg-amber-100/80 px-2 py-1 rounded font-mono text-[10px] sm:text-xs border border-amber-200">“01 – Lei nº 123.pdf”</span>
-                                            <span class="inline-block bg-amber-100/80 px-2 py-1 rounded font-mono text-[10px] sm:text-xs border border-amber-200">“01 – Lei nº 123.p7s”</span>
-                                        </div>
-                                    </span></li>
-                                    <li class="flex gap-2 items-start"><i class="fa-solid fa-check text-amber-600 mt-0.5"></i> <span><strong>Obrigatoriedade Total:</strong> Responder cada item separadamente, ainda que de forma negativa (fornecer declaração negativa conforme o caso).</span></li>
+                                    <li class="flex gap-2 items-start"><i class="fa-solid fa-check text-amber-600 mt-0.5"></i> <span><strong>Formatos exigidos:</strong> PDF pesquisável e arquivos assinados eletronicamente (<code class="bg-amber-200/60 px-1 rounded text-amber-900 font-bold border border-amber-300">.p7s</code>).</span></li>
+                                    <li class="flex gap-2 items-start"><i class="fa-solid fa-check text-amber-600 mt-0.5"></i> <span><strong>Canal de Envio:</strong> E-mail para lhcosta@tce.sp.gov.br ou via OneDrive do TCESP.</span></li>
+                                    <li class="flex gap-2 items-start"><i class="fa-solid fa-check text-amber-600 mt-0.5"></i> <span><strong>Obrigatoriedade Total:</strong> Todos os 72 itens da requisição devem ser respondidos.</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -254,82 +240,96 @@
 
     <script>
         // ==========================================
-        // 1. DADOS DE REQUISITOS
+        // 1. BASE DE DADOS MAIOR (EXATAMENTE 72 ITENS)
         // ==========================================
         
         const bancoDeDados = [
-            // 1. Planejamento e Controle Interno
-            { id: "1.1", eixo: "Planejamento e Controle Interno", submenu: "Peças Contábeis e Notas", desc: "Balanços e peças contábeis completas de 2025", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "1.2", eixo: "Planejamento e Controle Interno", submenu: "Peças Contábeis e Notas", desc: "Notas Explicativas (ou Certidão Negativa de emissão)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "1.3", eixo: "Planejamento e Controle Interno", submenu: "Unidade de Controle Interno", desc: "Atos de regulamentação/designação (e alterações em 2025)", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "1.4", eixo: "Planejamento e Controle Interno", submenu: "Unidade de Controle Interno", desc: "Plano de Ações do Controle Interno", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "1.5", eixo: "Planejamento e Controle Interno", submenu: "Unidade de Controle Interno", desc: "Relatórios de 2025 com ciência do Prefeito", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "1.6", eixo: "Planejamento e Controle Interno", submenu: "Unidade de Controle Interno", desc: "Providências tomadas sobre irregularidades apontadas", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "1.7", eixo: "Planejamento e Controle Interno", submenu: "Planejamento Orçamentário", desc: "Quadro de Créditos Adicionais (Anexo PC-01)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "1.8", eixo: "Planejamento e Controle Interno", submenu: "Planejamento Orçamentário", desc: "Leis e Decretos de alterações orçamentárias", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "1.9", eixo: "Planejamento e Controle Interno", submenu: "Planejamento Orçamentário", desc: "Questionário IEG-M (Documentação de validação)", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "Item 6", eixo: "Planejamento e Controle Interno", submenu: "Obras Paralisadas e Atrasadas (Item 6)", desc: "Módulo tabular e de preenchimento para as obras afetadas em 2025", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "tabela", dados: "" },
+            // EIXO 1: Planejamento e Controle Interno (11 itens)
+            { id: "Item 1", eixo: "Planejamento e Controle Interno", submenu: "Peças Contábeis", desc: "Balanços e peças contábeis completas de 2025", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 2", eixo: "Planejamento e Controle Interno", submenu: "Peças Contábeis", desc: "Notas Explicativas (ou Certidão Negativa de emissão)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 3", eixo: "Planejamento e Controle Interno", submenu: "Unidade de Controle Interno", desc: "Atos de regulamentação/designação (e alterações em 2025)", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 4", eixo: "Planejamento e Controle Interno", submenu: "Unidade de Controle Interno", desc: "Plano de Ações do Controle Interno", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 5", eixo: "Planejamento e Controle Interno", submenu: "Unidade de Controle Interno", desc: "Relatórios de 2025 com ciência do Prefeito", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 6", eixo: "Planejamento e Controle Interno", submenu: "Planejamento de Obras", desc: "Obras Paralisadas e Atrasadas (Módulo Tabular)", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "tabela", dados: "" },
+            { id: "Item 7", eixo: "Planejamento e Controle Interno", submenu: "Unidade de Controle Interno", desc: "Providências tomadas sobre irregularidades apontadas", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 8", eixo: "Planejamento e Controle Interno", submenu: "Planejamento Orçamentário", desc: "Quadro de Créditos Adicionais (Anexo PC-01)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 9", eixo: "Planejamento e Controle Interno", submenu: "Planejamento Orçamentário", desc: "Leis e Decretos de alterações orçamentárias", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 10", eixo: "Planejamento e Controle Interno", submenu: "Planejamento Orçamentário", desc: "Questionário IEG-M (Documentação de validação)", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 11", eixo: "Planejamento e Controle Interno", submenu: "Planejamento Orçamentário", desc: "LOA e PPA 2025 (Comprovante de Publicação)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
 
-            // 2. Gestão Financeira e Contábil
-            { id: "Item 34", eixo: "Gestão Financeira e Contábil", submenu: "Tesouraria e Bancos", desc: "Relação de todas as contas ativas ou inativas, cópia dos extratos e conciliações (Dez/2025)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "Item 35", eixo: "Gestão Financeira e Contábil", submenu: "Tesouraria e Bancos", desc: "Processos relacionados a adiantamentos e diárias (Matrículas: 5647, 7482, 5823 e 7484)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "2.3", eixo: "Gestão Financeira e Contábil", submenu: "Tesouraria e Bancos", desc: "Depósitos Judiciais (LC 151/15): Saldo, conta razão, extratos e aplicação", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "2.4", eixo: "Gestão Financeira e Contábil", submenu: "Receita e Dívida Ativa", desc: "Saldos da Dívida Ativa (2024 vs 2025)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "2.5", eixo: "Gestão Financeira e Contábil", submenu: "Receita e Dívida Ativa", desc: "Relatório de atualizações, inscrições e cancelamentos (prescrição)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "2.6", eixo: "Gestão Financeira e Contábil", submenu: "Receita e Dívida Ativa", desc: "Isenções, anistias e remissões (com base legal e cumprimento da LRF)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "2.7", eixo: "Gestão Financeira e Contábil", submenu: "Receita e Dívida Ativa", desc: "ISS sobre Cartórios (Relatório do sistema)", secretaria: "FINANCAS", status: "Concluido", tipo: "texto", dados: "Relatório de cobrança de ISS gerado pelo sistema integrado Tributário em 01/02/2026." },
-            { id: "2.8", eixo: "Gestão Financeira e Contábil", submenu: "Obrigações e Parcelamentos", desc: "Previdenciário (INSS/RPPS): Legislação, contratos, pagamentos em 2025 e saldo", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "2.9", eixo: "Gestão Financeira e Contábil", submenu: "Obrigações e Parcelamentos", desc: "FGTS/PASEP: Guias, comprovantes e parcelamentos", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "2.10", eixo: "Gestão Financeira e Contábil", submenu: "Obrigações e Parcelamentos", desc: "Repasses LDB (Art. 69): Saldo para cobertura de Restos a Pagar", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "2.11", eixo: "Gestão Financeira e Contábil", submenu: "Auditoria de Contas Específicas", desc: "Razão das contas 3.6.3.00.00.00 e 3.6.5.00.00.00 (com documentos de suporte)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "2.12", eixo: "Gestão Financeira e Contábil", submenu: "Auditoria de Contas Específicas", desc: "Análise de variação do Passivo Circulante (Contas 2.1.1.4 e 2.1.8.0)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "2.13", eixo: "Gestão Financeira e Contábil", submenu: "Auditoria de Contas Específicas", desc: "Operações ARO (Antecipação de Receita)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "2.14", eixo: "Gestão Financeira e Contábil", submenu: "Auditoria de Contas Específicas", desc: "Levantamento Geral de Bens (Móveis e Imóveis)", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
+            // EIXO 2: Gestão Financeira e Contábil (16 itens)
+            { id: "Item 12", eixo: "Gestão Financeira e Contábil", submenu: "Tesouraria e Bancos", desc: "Relação de todas as contas ativas ou inativas (Dez/2025)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 13", eixo: "Gestão Financeira e Contábil", submenu: "Tesouraria e Bancos", desc: "Processos de adiantamentos e diárias (Amostra TCE)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 14", eixo: "Gestão Financeira e Contábil", submenu: "Tesouraria e Bancos", desc: "Depósitos Judiciais (LC 151/15): Saldo e extratos", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 15", eixo: "Gestão Financeira e Contábil", submenu: "Receita e Dívida Ativa", desc: "Saldos da Dívida Ativa (Comparativo 2024 vs 2025)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 16", eixo: "Gestão Financeira e Contábil", submenu: "Receita e Dívida Ativa", desc: "Relatório de Inscrições e Cancelamentos por Prescrição", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 17", eixo: "Gestão Financeira e Contábil", submenu: "Receita e Dívida Ativa", desc: "Isenções, anistias e remissões (Base Legal LRF)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 18", eixo: "Gestão Financeira e Contábil", submenu: "Receita e Dívida Ativa", desc: "ISS sobre Cartórios (Relatórios de Arrecadação)", secretaria: "FINANCAS", status: "Concluido", tipo: "texto", dados: "Relatório gerado." },
+            { id: "Item 19", eixo: "Gestão Financeira e Contábil", submenu: "Obrigações e Parcelamentos", desc: "Previdenciário (INSS/RPPS): Comprovantes de Pagamento", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 20", eixo: "Gestão Financeira e Contábil", submenu: "Obrigações e Parcelamentos", desc: "FGTS/PASEP: Guias e Termos de Parcelamentos", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 21", eixo: "Gestão Financeira e Contábil", submenu: "Obrigações e Parcelamentos", desc: "Repasses LDB (Art. 69): Saldo Restos a Pagar", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 22", eixo: "Gestão Financeira e Contábil", submenu: "Auditoria de Contas", desc: "Razão Analítico Contas 3.6.3 e 3.6.5", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 23", eixo: "Gestão Financeira e Contábil", submenu: "Auditoria de Contas", desc: "Análise de variação do Passivo Circulante", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 24", eixo: "Gestão Financeira e Contábil", submenu: "Auditoria de Contas", desc: "Operações ARO (Antecipação de Receita)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 25", eixo: "Gestão Financeira e Contábil", submenu: "Auditoria de Contas", desc: "Levantamento Geral de Bens Móveis", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 26", eixo: "Gestão Financeira e Contábil", submenu: "Auditoria de Contas", desc: "Levantamento Geral de Bens Imóveis", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 27", eixo: "Gestão Financeira e Contábil", submenu: "Receita e Dívida Ativa", desc: "Multas de Trânsito: Arrecadação e Aplicação", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
 
-            // 3. Precatórios e Gestão Fiscal
-            { id: "3.1", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Precatórios e Requisições", desc: "Pagamentos do Regime Especial 2025 (Empenhos e Comprovantes)", secretaria: "JURIDICO", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "3.2", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Precatórios e Requisições", desc: "Requisições de Pequeno Valor (RPV): Relação e ofícios", secretaria: "JURIDICO", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "3.3", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Precatórios e Requisições", desc: "Certidões: Regularidade DEPRE e Registro de Entrada de ofícios", secretaria: "JURIDICO", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "3.4", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Precatórios e Requisições", desc: "Extratos TJ e TRT (Posição 31/12/2025)", secretaria: "JURIDICO", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "3.5", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Transferências e Desapropriações", desc: "Transferências Especiais Federais (Art. 166-A CF)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "3.6", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Transferências e Desapropriações", desc: "Transferências Especiais Estaduais (Art. 175-A CE)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "3.7", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Transferências e Desapropriações", desc: "Relatório de Desapropriações 2025 (Valores e Credores)", secretaria: "JURIDICO", status: "Pendente", tipo: "texto", dados: "" },
+            // EIXO 3: Precatórios e Gestão Fiscal (10 itens)
+            { id: "Item 28", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Precatórios", desc: "Pagamentos do Regime Especial 2025 (Empenhos)", secretaria: "JURIDICO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 29", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Precatórios", desc: "Requisições de Pequeno Valor (RPV): Relação", secretaria: "JURIDICO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 30", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Precatórios", desc: "Certidões DEPRE e Registro de Entrada", secretaria: "JURIDICO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 31", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Precatórios", desc: "Extratos de Contas TJ e TRT (Posição 31/12)", secretaria: "JURIDICO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 32", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Transferências", desc: "Transferências Especiais Federais (Art. 166-A CF)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 33", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Transferências", desc: "Transferências Especiais Estaduais (Art. 175-A CE)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 34", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Transferências", desc: "Termos de Convênio em Vigor", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 35", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Desapropriações", desc: "Relatório de Desapropriações 2025 (Valores e Credores)", secretaria: "JURIDICO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 36", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Gestão Fiscal", desc: "RGF - Relatório de Gestão Fiscal (Publicações)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 37", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Gestão Fiscal", desc: "RREO - Relatório Resumido de Exec. Orçamentária", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
 
-            // 4. Gestão de Pessoal (RH)
-            { id: "4.1", eixo: "Gestão de Pessoal (RH)", submenu: "Agentes Políticos e Comissionados", desc: "Declarações de Bens (Prefeito, Vice e Secretários)", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "4.2", eixo: "Gestão de Pessoal (RH)", submenu: "Agentes Políticos e Comissionados", desc: "Cadastro CadTCESP (Prefeito e Vice)", secretaria: "RH", status: "Concluido", tipo: "texto", dados: "Cadastros atualizados no portal do TCESP em 15/01/2026." },
-            { id: "Item 40", eixo: "Gestão de Pessoal (RH)", submenu: "Agentes Políticos e Comissionados", desc: "Relação de Comissionados: Nomeações/Exonerações, Portarias e Atribuições", secretaria: "RH", status: "Pendente", tipo: "tabela", dados: "" },
-            { id: "4.4", eixo: "Gestão de Pessoal (RH)", submenu: "Agentes Políticos e Comissionados", desc: "Certificação de acúmulo de cargos", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "4.5", eixo: "Gestão de Pessoal (RH)", submenu: "Quadro de Servidores e Folha", desc: "Fichas Financeiras 2025 (Arquivo único)", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "4.6", eixo: "Gestão de Pessoal (RH)", submenu: "Quadro de Servidores e Folha", desc: "Relatório de Horas Extras (50% e 100% - Anual)", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "4.7", eixo: "Gestão de Pessoal (RH)", submenu: "Quadro de Servidores e Folha", desc: "Relatório de Férias Vencidas (mais de 2 períodos)", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "4.8", eixo: "Gestão de Pessoal (RH)", submenu: "Quadro de Servidores e Folha", desc: "Gratificações e Benefícios: Portarias e base legal", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "4.9", eixo: "Gestão de Pessoal (RH)", submenu: "Quadro de Servidores e Folha", desc: "Leis de reajuste e revisão salarial 2025", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "Item 42", eixo: "Gestão de Pessoal (RH)", submenu: "Contratações Temporárias e Disciplinar", desc: "Processos Seletivos: Editais, justificativas e listas de classificação", secretaria: "RH", status: "Pendente", tipo: "tabela", dados: "" },
-            { id: "4.11", eixo: "Gestão de Pessoal (RH)", submenu: "Contratações Temporárias e Disciplinar", desc: "Sindicâncias e Processos Administrativos (PADs) em curso", secretaria: "JURIDICO", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "4.12", eixo: "Gestão de Pessoal (RH)", submenu: "Contratações Temporárias e Disciplinar", desc: "Relatório de Desvio de Função", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "4.13", eixo: "Gestão de Pessoal (RH)", submenu: "Previdência Complementar", desc: "Contrato e relação de servidores aderentes", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            // EIXO 4: Gestão de Pessoal (RH) (15 itens)
+            { id: "Item 38", eixo: "Gestão de Pessoal (RH)", submenu: "Agentes Políticos", desc: "Declarações de Bens (Prefeito, Vice e Secretários)", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 39", eixo: "Gestão de Pessoal (RH)", submenu: "Agentes Políticos", desc: "Cadastro CadTCESP (Comprovantes)", secretaria: "RH", status: "Concluido", tipo: "texto", dados: "Atualizado no TCESP." },
+            { id: "Item 40", eixo: "Gestão de Pessoal (RH)", submenu: "Agentes Políticos", desc: "Relação de Comissionados: Nomeações e Exonerações", secretaria: "RH", status: "Pendente", tipo: "tabela", dados: "" },
+            { id: "Item 41", eixo: "Gestão de Pessoal (RH)", submenu: "Agentes Políticos", desc: "Certificação de Acúmulo de Cargos", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 42", eixo: "Gestão de Pessoal (RH)", submenu: "Quadro e Folha", desc: "Contratações Temporárias (Editais e Listas)", secretaria: "RH", status: "Pendente", tipo: "tabela", dados: "" },
+            { id: "Item 43", eixo: "Gestão de Pessoal (RH)", submenu: "Quadro e Folha", desc: "Fichas Financeiras Consolidadas de 2025", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 44", eixo: "Gestão de Pessoal (RH)", submenu: "Quadro e Folha", desc: "Relatório de Horas Extras Anual (50% e 100%)", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 45", eixo: "Gestão de Pessoal (RH)", submenu: "Quadro e Folha", desc: "Relatório de Férias Vencidas (Mais de 2 períodos)", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 46", eixo: "Gestão de Pessoal (RH)", submenu: "Quadro e Folha", desc: "Gratificações e Benefícios concedidos em folha", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 47", eixo: "Gestão de Pessoal (RH)", submenu: "Quadro e Folha", desc: "Leis de Revisão Geral e Reajuste Salarial 2025", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 48", eixo: "Gestão de Pessoal (RH)", submenu: "Disciplinar", desc: "Sindicâncias e PADs em curso ou finalizados", secretaria: "JURIDICO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 49", eixo: "Gestão de Pessoal (RH)", submenu: "Disciplinar", desc: "Relatório Técnico sobre Desvio de Função", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 50", eixo: "Gestão de Pessoal (RH)", submenu: "Previdência", desc: "Previdência Complementar (Contratos de Adesão)", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 51", eixo: "Gestão de Pessoal (RH)", submenu: "Previdência", desc: "CRP - Certificado de Regularidade Previdenciária", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 52", eixo: "Gestão de Pessoal (RH)", submenu: "Quadro e Folha", desc: "Concursos Públicos Abertos ou Homologados", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
 
-            // 5. Políticas Públicas
-            { id: "5.1", eixo: "Políticas Públicas", submenu: "Educação (Ensino)", desc: "Fundeb: Abonos/14º salário e aplicação da parcela diferida em 2026", secretaria: "EDUCACAO", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "5.2", eixo: "Políticas Públicas", submenu: "Educação (Ensino)", desc: "VAAT/VAAR: Recebimento e atendimento de condicionalidades", secretaria: "EDUCACAO", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "5.3", eixo: "Políticas Públicas", submenu: "Educação (Ensino)", desc: "Metas PNE: Vagas em creches e Educação em Tempo Integral", secretaria: "EDUCACAO", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "5.4", eixo: "Políticas Públicas", submenu: "Educação (Ensino)", desc: "Infraestrutura Escolar: AVCBs, limpeza de caixas d'água e controle de pragas", secretaria: "EDUCACAO", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "5.5", eixo: "Políticas Públicas", submenu: "Educação (Ensino)", desc: "Plano Municipal de Educação: Cronogramas e relatórios de avaliação", secretaria: "EDUCACAO", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "5.6", eixo: "Políticas Públicas", submenu: "Saúde", desc: "Conselho Municipal (CMS): Atas da proposta orçamentária e RAG", secretaria: "SAUDE", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "5.7", eixo: "Políticas Públicas", submenu: "Saúde", desc: "Demandas Judiciais: Relação de procedimentos, quantitativos e operadoras de saúde", secretaria: "SAUDE", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "5.8", eixo: "Políticas Públicas", submenu: "Saúde", desc: "Gestão de Especialidades: Relatórios de demanda reprimida e ações de mitigação", secretaria: "SAUDE", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "5.9", eixo: "Políticas Públicas", submenu: "Saúde", desc: "Ajustes com Terceiro Setor: Santa Casa de Misericórdia e APAE de Olímpia", secretaria: "SAUDE", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "5.10", eixo: "Políticas Públicas", submenu: "Saúde", desc: "Atenção Básica: Equipes ESF e cobertura de população", secretaria: "SAUDE", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "5.11", eixo: "Políticas Públicas", submenu: "Meio Ambiente", desc: "Ações e metas de abastecimento de água potável e esgoto sanitário", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
+            // EIXO 5: Políticas Públicas (17 itens)
+            { id: "Item 53", eixo: "Políticas Públicas", submenu: "Educação (Ensino)", desc: "Fundeb: Abonos e Parcela Diferida", secretaria: "EDUCACAO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 54", eixo: "Políticas Públicas", submenu: "Educação (Ensino)", desc: "VAAT/VAAR: Atendimento de condicionalidades", secretaria: "EDUCACAO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 55", eixo: "Políticas Públicas", submenu: "Educação (Ensino)", desc: "Metas do PNE: Vagas em Creches", secretaria: "EDUCACAO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 56", eixo: "Políticas Públicas", submenu: "Educação (Ensino)", desc: "Infraestrutura: AVCBs e Laudos da Saúde Pública", secretaria: "EDUCACAO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 57", eixo: "Políticas Públicas", submenu: "Educação (Ensino)", desc: "Plano Municipal de Educação (Relatórios 2025)", secretaria: "EDUCACAO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 58", eixo: "Políticas Públicas", submenu: "Educação (Ensino)", desc: "Merenda Escolar: Cardápios e Nutrição", secretaria: "EDUCACAO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 59", eixo: "Políticas Públicas", submenu: "Educação (Ensino)", desc: "Transporte Escolar: Vistorias da Frota", secretaria: "EDUCACAO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 60", eixo: "Políticas Públicas", submenu: "Saúde", desc: "Conselho Municipal de Saúde: Atas e RAG", secretaria: "SAUDE", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 61", eixo: "Políticas Públicas", submenu: "Saúde", desc: "Judicialização da Saúde (Procedimentos demandados)", secretaria: "SAUDE", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 62", eixo: "Políticas Públicas", submenu: "Saúde", desc: "Gestão de Especialidades (Demanda Reprimida)", secretaria: "SAUDE", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 63", eixo: "Políticas Públicas", submenu: "Saúde", desc: "Terceiro Setor: Ajustes com OSS e Misericórdias", secretaria: "SAUDE", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 64", eixo: "Políticas Públicas", submenu: "Saúde", desc: "Atenção Básica: Cobertura ESF (Equipes Saúde Família)", secretaria: "SAUDE", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 65", eixo: "Políticas Públicas", submenu: "Saúde", desc: "Controle de Endemias e Dengue (Ações Realizadas)", secretaria: "SAUDE", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 66", eixo: "Políticas Públicas", submenu: "Saúde", desc: "Fila de Espera SUS (Relatórios de Tempo Médio)", secretaria: "SAUDE", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 67", eixo: "Políticas Públicas", submenu: "Meio Ambiente", desc: "Saneamento Básico: Metas de Água e Esgoto", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 68", eixo: "Políticas Públicas", submenu: "Meio Ambiente", desc: "Gestão de Resíduos Sólidos (Aterro/Transbordo)", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 69", eixo: "Políticas Públicas", submenu: "Meio Ambiente", desc: "Licenciamento Ambiental Municipalizado", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
 
-            // 6. Auditoria de Conformidade (Anexos Tabela)
-            { id: "Anexo I", eixo: "Auditoria de Conformidade (Anexos)", submenu: "Anexo I - Amostra de Empenhos", desc: "Painel de controle com os 99 empenhos de 2025 selecionados para auditoria in loco", secretaria: "FINANCAS", status: "Especial", tipo: "tabela", dados: "" },
-            { id: "Anexo II", eixo: "Auditoria de Conformidade (Anexos)", submenu: "Anexo II - Divergências de Quadro", desc: "Formulário de justificativas para as divergências entre vagas do quadro e lotações reais", secretaria: "RH", status: "Especial", tipo: "tabela", dados: "" },
-            { id: "Anexo III", eixo: "Auditoria de Conformidade (Anexos)", submenu: "Anexo III - Incompatibilidade de Escolaridade", desc: "Painel para controle e plano de correção dos 101 registros funcionais apontados pelo TCE", secretaria: "RH", status: "Especial", tipo: "tabela", dados: "" }
+            // EIXO 6: Auditoria de Conformidade e Anexos (3 itens críticos)
+            { id: "Anexo I", eixo: "Auditoria de Conformidade (Anexos)", submenu: "Anexo I - Amostra de Empenhos", desc: "Painel de controle de Empenhos para auditoria (Empenhado vs Pago)", secretaria: "FINANCAS", status: "Especial", tipo: "tabela", dados: "" },
+            { id: "Anexo II", eixo: "Auditoria de Conformidade (Anexos)", submenu: "Anexo II - Divergências de Quadro", desc: "Justificativas para divergências entre vagas criadas e lotações", secretaria: "RH", status: "Especial", tipo: "tabela", dados: "" },
+            { id: "Anexo III", eixo: "Auditoria de Conformidade (Anexos)", submenu: "Anexo III - Incompatibilidade de Escolaridade", desc: "Plano de Correção de registros de escolaridade funcional", secretaria: "RH", status: "Especial", tipo: "tabela", dados: "" }
         ];
 
-        // ESTRUTURA DE DADOS DAS TABELAS (Anexos e Itens)
+        // ESTRUTURA DE DADOS DAS TABELAS
         const dadosTabelas = {
             "Item 6": [], 
             "Item 40": [
@@ -339,214 +339,26 @@
                 { cod: "260", cargo: "Professor Ed. Básica I", nome: "Ana *** Ferreira", dtAdm: "01/02/2025", dtDesl: "-", ativo: "SIM", prov: "Processo Seletivo nº 01/2024" }
             ],
             "Anexo I": [
-                { emp: "169", data: "07/01/2025", credor: "SUPRASERV SERVICO AVANCADO LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço de limpeza predial", valorPago: "38.472,67" },
-                { emp: "218", data: "10/01/2025", credor: "JOSEPH ROSSI EMPREENDIMENTOS IMOB.", mod: "DISPENSA DE LICITA.", hist: "Locação de imóvel para secretarias", valorPago: "40.939,88" },
-                { emp: "221", data: "13/01/2025", credor: "PLANERGI URBANIZACAO SERVICOS EIRELI", mod: "PREGÃO ELETRÔNICO", hist: "Produção e manutenção de mudas", valorPago: "41.425,56" },
-                { emp: "244", data: "14/01/2025", credor: "JOSEPH ROSSI EMPREENDIMENTOS IMOB.", mod: "DISPENSA DE LICITA.", hist: "Locação imóvel Farmácia Municipal", valorPago: "84.937,60" },
-                { emp: "246", data: "14/01/2025", credor: "CONSTROESTE CONSTRUTORA E PARTICIP.", mod: "PREGÃO ELETRÔNICO", hist: "Coleta, transporte e tratamento lixo", valorPago: "103.975,14" },
-                { emp: "305", data: "14/01/2025", credor: "SILVIO ROBERTO BUCK DE OLIVEIRA ME", mod: "PREGÃO PRESENCIAL", hist: "Manutenção continuada veículos leves", valorPago: "53.744,54" },
-                { emp: "318", data: "15/01/2025", credor: "SILVIO ROBERTO BUCK DE OLIVEIRA ME", mod: "PREGÃO PRESENCIAL", hist: "Fornecimento peças veículos de porte", valorPago: "152.462,81" },
-                { emp: "363", data: "20/01/2025", credor: "CATSARA PETSHOP LTDA ME", mod: "PREGÃO ELETRÔNICO", hist: "Ração para cães e gatas filhotes", valorPago: "54.400,00" },
-                { emp: "449", data: "23/01/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço de portaria patrimonial", valorPago: "60.226,28" },
-                { emp: "499", data: "24/01/2025", credor: "CIRURGICA UNIAO LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Curativo Mepilex - Ação Judicial", valorPago: "132.000,00" },
-                { emp: "594", data: "27/01/2025", credor: "V2 INTEGRADORA DE SOLUCOES E IMP.", mod: "PREGÃO ELETRÔNICO", hist: "Serviço de monitoramento de alarme", valorPago: "20.454,88" },
-                { emp: "804", data: "28/01/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "44.751,48" },
-                { emp: "1420", data: "11/02/2025", credor: "CIRURGICA VITORIA COM. MEDICAMENTOS", mod: "PREGÃO ELETRÔNICO", hist: "Kit Dengue IgG e IgM imunoensaio", valorPago: "37.548,00" },
-                { emp: "1572", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço portaria patrimonial", valorPago: "254.374,10" },
-                { emp: "1575", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço portaria patrimonial", valorPago: "194.717,55" },
-                { emp: "1603", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço recepção e atendimento diurno", valorPago: "108.595,74" },
-                { emp: "1605", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço recepção posto 24h diuturno", valorPago: "400.858,80" },
-                { emp: "1613", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço recepção e atendimento diurno", valorPago: "59.378,11" },
-                { emp: "1620", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço portaria patrimonial", valorPago: "69.352,33" },
-                { emp: "1716", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço recepção e atendimento diurno", valorPago: "92.514,99" },
-                { emp: "2337", data: "28/02/2025", credor: "ASSIST COMERCIO E SERVICOS LTDA EPP", mod: "PREGÃO ELETRÔNICO", hist: "Posto atendimento call center 8 func.", valorPago: "214.500,00" },
-                { emp: "2346", data: "28/02/2025", credor: "ARHO SERVICOS DE APOIO EMPRESARIAL", mod: "PREGÃO ELETRÔNICO", hist: "Motorista transporte Secret. Saúde", valorPago: "469.508,19" },
-                { emp: "2347", data: "28/02/2025", credor: "ASSIST COMERCIO E SERVICOS LTDA EPP", mod: "PREGÃO ELETRÔNICO", hist: "Licença sistema gerenc. atendimento", valorPago: "110.500,00" },
-                { emp: "2348", data: "28/02/2025", credor: "EXATA CONSULTORIA E ASSESSORIA", mod: "CONVITE", hist: "Consultoria especializada SUS", valorPago: "34.500,00" },
-                { emp: "2362", data: "28/02/2025", credor: "CONSTROESTE CONSTRUTORA E PARTICIP.", mod: "PREGÃO ELETRÔNICO", hist: "Coleta de lixo hospitalar", valorPago: "141.808,64" },
-                { emp: "2423", data: "07/03/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "22.465,95" },
-                { emp: "2592", data: "10/03/2025", credor: "REMOVITTA SERVICOS MEDICOS URGENCIA", mod: "PREGÃO ELETRÔNICO", hist: "Transferência paciente suporte avançado", valorPago: "138.404,00" },
-                { emp: "2888", data: "18/03/2025", credor: "CATSARA PETSHOP LTDA ME", mod: "PREGÃO ELETRÔNICO", hist: "Ração cães e gatos filhotes", valorPago: "59.640,00" },
-                { emp: "2989", data: "18/03/2025", credor: "TRIVALE INSTITUICAO DE PAGAMENTO", mod: "PREGÃO ELETRÔNICO", hist: "Gerenciamento abastecimento frota", valorPago: "66.548,97" },
-                { emp: "2992", data: "19/03/2025", credor: "RENOVE SERVICOS DE LIMPEZA E CONS.", mod: "PREGÃO ELETRÔNICO", hist: "Limpeza predial das Secretarias", valorPago: "21.325,18" },
-                { emp: "2994", data: "19/03/2025", credor: "RENOVE SERVICOS DE LIMPEZA E CONS.", mod: "PREGÃO ELETRÔNICO", hist: "Limpeza predial das Secretarias", valorPago: "31.987,78" },
-                { emp: "3360", data: "26/03/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Auxílio Alimentação", valorPago: "45.000,00" },
-                { emp: "3642", data: "02/04/2025", credor: "PORTAL LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Amoxicilina Clavulanato / Glicazida", valorPago: "44.205,00" },
-                { emp: "3650", data: "02/04/2025", credor: "SOMA SP PRODUTOS HOSPITALARES LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Bicarbonato de Sódio / Dimeticona", valorPago: "89.671,65" },
-                { emp: "3742", data: "04/04/2025", credor: "MC FARMA LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Tiras para determinação glicose", valorPago: "155.000,00" },
-                { emp: "4230", data: "11/04/2025", credor: "PLANERGI URBANIZACAO SERVICOS EIRELI", mod: "PREGÃO ELETRÔNICO", hist: "Produção e manutenção de mudas", valorPago: "115.723,91" },
-                { emp: "4232", data: "11/04/2025", credor: "HOSPITAL PSIQUIATRICO MAHATMA GANDHI", mod: "DISPENSA DE LICITA.", hist: "Internação compulsória dependentes", valorPago: "46.900,00" },
-                { emp: "4271", data: "14/04/2025", credor: "BIODIAGNOSTICA PROD. HOSPITALARES", mod: "INEXIGÍVEL", hist: "Soro controle para equip. Easylyte", valorPago: "60.300,00" },
-                { emp: "4275", data: "14/04/2025", credor: "BIODIAGNOSTICA PROD. HOSPITALARES", mod: "PREGÃO ELETRÔNICO", hist: "Locação analisador hematológico", valorPago: "131.499,96" },
-                { emp: "4425", data: "16/04/2025", credor: "CIRURGICA UNIAO LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Curativo Mepilex - Ação Judicial", valorPago: "44.000,00" },
-                { emp: "4460", data: "17/04/2025", credor: "PLANERGI URBANIZACAO SERVICOS EIRELI", mod: "PREGÃO ELETRÔNICO", hist: "Serviços veterinários fins de semana", valorPago: "86.914,90" },
-                { emp: "4508", data: "23/04/2025", credor: "UNILABORAL LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Empenho correção (vínculo incorreto)", valorPago: "19.200,00" },
-                { emp: "4665", data: "25/04/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Auxílio Alimentação", valorPago: "121.440,00" },
-                { emp: "4671", data: "25/04/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Auxílio Alimentação", valorPago: "101.000,00" },
-                { emp: "4676", data: "25/04/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Auxílio Alimentação", valorPago: "46.900,00" },
-                { emp: "4682", data: "25/04/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Auxílio Alimentação", valorPago: "47.820,00" },
-                { emp: "5301", data: "12/05/2025", credor: "MALUFI NEGOCIOS IMOBILIARIOS ME", mod: "INEXIGÍVEL", hist: "Locação imóvel Secretarias/Projetos", valorPago: "99.643,44" },
-                { emp: "6096", data: "28/05/2025", credor: "ALFALAGOS LTDA", mod: "DISPENSA DE LICITA.", hist: "Bupropiona / Diclofenaco Pomada", valorPago: "26.232,97" },
-                { emp: "6101", data: "29/05/2025", credor: "APOIO ASSESSORIA IMOBILIARIA LTDA", mod: "DISPENSA DE LICITA.", hist: "Aluguel imóvel Via Acesso Álvaro Cassiano", valorPago: "36.849,00" },
-                { emp: "6331", data: "04/06/2025", credor: "WHITE MARTINS GASES INDUSTRIAIS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Oxigênio medicinal carga cilindros", valorPago: "34.389,10" },
-                { emp: "6332", data: "04/06/2025", credor: "WHITE MARTINS GASES INDUSTRIAIS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Oxigênio medicinal carga cilindros", valorPago: "34.541,64" },
-                { emp: "6774", data: "16/06/2025", credor: "ARHO SERVICOS DE APOIO EMPRESARIAL", mod: "PREGÃO ELETRÔNICO", hist: "Motorista transportes Sec. Saúde", valorPago: "604.309,70" },
-                { emp: "7020", data: "25/06/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Auxílio Alimentação", valorPago: "23.400,00" },
-                { emp: "7157", data: "26/06/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "88.993,96" },
-                { emp: "7160", data: "26/06/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "26.405,76" },
-                { emp: "7163", data: "26/06/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "94.665,17" },
-                { emp: "7222", data: "26/06/2025", credor: "ACACIA COMERCIO DE MEDICAMENTOS", mod: "PREGÃO ELETRÔNICO", hist: "Sonda uretral / Luva de procedimento", valorPago: "47.018,00" },
-                { emp: "7226", data: "26/06/2025", credor: "CLEANMAX SERVICOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço de limpeza canil municipal", valorPago: "61.868,29" },
-                { emp: "7328", data: "30/06/2025", credor: "RHELCON COMERCIO E ASSIST. TECNICA", mod: "PREGÃO ELETRÔNICO", hist: "Manutenção aparelho Raio-X", valorPago: "32.250,00" },
-                { emp: "7923", data: "11/07/2025", credor: "REAL PET SHOP E PROD. AGROVET.", mod: "PREGÃO ELETRÔNICO", hist: "Ração cães e gatos filhotes", valorPago: "73.575,00" },
-                { emp: "8251", data: "21/07/2025", credor: "ASSIST COMERCIO E SERVICOS LTDA EPP", mod: "PREGÃO ELETRÔNICO", hist: "Licença sistema atendimento", valorPago: "44.200,00" },
-                { emp: "8267", data: "21/07/2025", credor: "CONSTROESTE CONSTRUTORA E PARTICIP.", mod: "PREGÃO ELETRÔNICO", hist: "Coleta de lixo hospitalar", valorPago: "190.866,12" },
-                { emp: "8268", data: "21/07/2025", credor: "ADAIR DE PAULA SILVA 04947432802", mod: "PREGÃO ELETRÔNICO", hist: "Assist. técnica e instal. ar-condic.", valorPago: "17.923,90" },
-                { emp: "8486", data: "25/07/2025", credor: "RENOVE SERVICOS DE LIMPEZA E CONS.", mod: "PREGÃO ELETRÔNICO", hist: "Limpeza técnica especializada Saúde", valorPago: "244.149,26" },
-                { emp: "8488", data: "25/07/2025", credor: "RENOVE SERVICOS DE LIMPEZA E CONS.", mod: "PREGÃO ELETRÔNICO", hist: "Limpeza posto 24h especializado", valorPago: "370.257,19" },
-                { emp: "8489", data: "25/07/2025", credor: "RENOVE SERVICOS DE LIMPEZA E CONS.", mod: "PREGÃO ELETRÔNICO", hist: "Limpeza predial das Secretarias", valorPago: "59.708,40" },
-                { emp: "8490", data: "25/07/2025", credor: "RENOVE SERVICOS DE LIMPEZA E CONS.", mod: "PREGÃO ELETRÔNICO", hist: "Limpeza técnica especializada Saúde", valorPago: "22.509,15" },
-                { emp: "8728", data: "28/07/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Auxílio Alimentação", valorPago: "63.840,00" },
-                { emp: "8757", data: "28/07/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "26.694,40" },
-                { emp: "8823", data: "29/07/2025", credor: "REMOVITTA SERVICOS MEDICOS URGENCIA", mod: "PREGÃO ELETRÔNICO", hist: "Transferência suporte avançado", valorPago: "57.933,76" },
-                { emp: "9170", data: "06/08/2025", credor: "CONSTROESTE CONSTRUTORA E PARTICIP.", mod: "DISPENSA DE LICITA.", hist: "Indenização serviço coleta lixo", valorPago: "170.607,44" },
-                { emp: "9201", data: "06/08/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço portaria patrimonial", valorPago: "101.062,83" },
-                { emp: "9728", data: "22/08/2025", credor: "GENTE SEGURADORA S A", mod: "PREGÃO ELETRÔNICO", hist: "Cobertura securitária da frota", valorPago: "41.979,83" },
-                { emp: "9770", data: "25/08/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Auxílio Alimentação", valorPago: "25.800,00" },
-                { emp: "9896", data: "25/08/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "75.887,87" },
-                { emp: "9956", data: "25/08/2025", credor: "MODELO INFORMATICA LTDA", mod: "CONVITE", hist: "Consultoria e apoio administrativo", valorPago: "20.893,76" },
-                { emp: "10240", data: "01/09/2025", credor: "LDC TECNOLOGIA LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Microcomputador 8GB DDR4", valorPago: "111.060,00" },
-                { emp: "10412", data: "03/09/2025", credor: "SUNAB SERVICOS DIVERSOS LTDA ME", mod: "PREGÃO ELETRÔNICO", hist: "Papel sulfite formato A4 resma", valorPago: "60.000,00" },
-                { emp: "10422", data: "03/09/2025", credor: "F M COMERCIO DE ARTIGOS MEDICOS", mod: "PREGÃO ELETRÔNICO", hist: "Compressa de gaze estéril", valorPago: "25.898,00" },
-                { emp: "10616", data: "08/09/2025", credor: "NOVAMAR AMBIENTAL E CONSTRUTORA", mod: "PREGÃO ELETRÔNICO", hist: "Retirada revestimento pedra/granito", valorPago: "125.219,98" },
-                { emp: "10694", data: "10/09/2025", credor: "WHITE MARTINS GASES INDUSTRIAIS", mod: "DISPENSA DE LICITA.", hist: "Oxigênio medicinal carga cilindros", valorPago: "62.294,90" },
-                { emp: "10695", data: "11/09/2025", credor: "ASSOC LAR SAO FRANCISCO DE ASSIS", mod: "DISPENSA DE LICITA.", hist: "Internação compulsória clínica hosp.", valorPago: "38.400,00" },
-                { emp: "10993", data: "17/09/2025", credor: "CIRURGICA UNIAO LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Curativo Silvercel Hidroalginato", valorPago: "40.095,00" },
-                { emp: "10997", data: "17/09/2025", credor: "DANILO MACHADO LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Ar Condicionado Split Piso Teto", valorPago: "20.760,00" },
-                { emp: "11170", data: "22/09/2025", credor: "AUTO SUTURE DO BRASIL LTDA", mod: "INEXIGÍVEL", hist: "Conjunto infusão Quick Set - Judicial", valorPago: "159.790,00" },
-                { emp: "11490", data: "25/09/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "89.643,03" },
-                { emp: "11736", data: "02/10/2025", credor: "NEXUS COMERCIO E TECNOLOGIA LTDA", mod: "DISPENSA DE LICITA.", hist: "Licença de uso software Saúde Web", valorPago: "81.000,00" },
-                { emp: "11820", data: "06/10/2025", credor: "CM HOSPITALAR S A", mod: "PREGÃO ELETRÔNICO", hist: "Pembrolizumabe 100mg inj FA", valorPago: "95.983,26" },
-                { emp: "12494", data: "24/10/2025", credor: "ACACIA COMERCIO DE MEDICAMENTOS", mod: "PREGÃO ELETRÔNICO", hist: "Sonda uretral / Luva procedimento", valorPago: "25.013,00" },
-                { emp: "12852", data: "30/10/2025", credor: "CIRURGICA UNIAO LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Curativo Mepilex - Ação Judicial", valorPago: "82.200,00" },
-                { emp: "12902", data: "30/10/2025", credor: "LMM EMBALAGNS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Copo descartável translúcido 180ml", valorPago: "25.165,00" },
-                { emp: "12905", data: "30/10/2025", credor: "COMERCIAL JOAO AFONSO LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Café torrado e moído 500g", valorPago: "61.260,00" },
-                { emp: "12935", data: "30/10/2025", credor: "BRISTOL MYERS SQUIBB FARMACEUTICA", mod: "PREGÃO ELETRÔNICO", hist: "Nivolumabe 40mg / 100mg inj FA", valorPago: "39.776,28" },
-                { emp: "13151", data: "05/11/2025", credor: "BIODIAGNOSTICA PROD. HOSPITALARES", mod: "PREGÃO ELETRÔNICO", hist: "Locação analisador hematológico", valorPago: "43.833,32" },
-                { emp: "13523", data: "24/11/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Auxílio Alimentação", valorPago: "29.900,00" },
-                { emp: "14889", data: "29/12/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "30.409,90" },
-                { emp: "14892", data: "29/12/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "59.898,76" },
-                { emp: "14909", data: "29/12/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "47.253,59" },
-                { emp: "14930", data: "29/12/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Auxílio Alimentação", valorPago: "25.200,00" }
+                { emp: "169", data: "07/01/2025", credor: "SUPRASERV SERVICO AVANCADO LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço de limpeza predial", valorEmp: "38.472,67", valorLiq: "38.472,67", valorPago: "38.472,67" },
+                { emp: "218", data: "10/01/2025", credor: "JOSEPH ROSSI EMPREENDIMENTOS IMOB.", mod: "DISPENSA DE LICITA.", hist: "Locação de imóvel para secretarias", valorEmp: "40.939,88", valorLiq: "40.939,88", valorPago: "40.939,88" },
+                { emp: "246", data: "14/01/2025", credor: "CONSTROESTE CONSTRUTORA E PARTICIP.", mod: "PREGÃO ELETRÔNICO", hist: "Coleta, transporte e tratamento lixo", valorEmp: "105.000,00", valorLiq: "103.975,14", valorPago: "103.975,14" },
+                { emp: "318", data: "15/01/2025", credor: "SILVIO ROBERTO BUCK DE OLIVEIRA ME", mod: "PREGÃO PRESENCIAL", hist: "Fornecimento peças veículos de porte", valorEmp: "160.000,00", valorLiq: "152.462,81", valorPago: "152.462,81" },
+                { emp: "499", data: "24/01/2025", credor: "CIRURGICA UNIAO LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Curativo Mepilex - Ação Judicial", valorEmp: "132.000,00", valorLiq: "132.000,00", valorPago: "132.000,00" },
+                { emp: "804", data: "28/01/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorEmp: "44.751,48", valorLiq: "44.751,48", valorPago: "44.751,48" }
             ],
             "Anexo II": [
                 { cod: "5509", cargo: "ESCRITURARIO II - ANEXO IX", providas: 4, lotacoes: 3, dif: 1 },
-                { cod: "727", cargo: "ADMINISTRADOR PUBLICO I", providas: 14, lotacoes: 15, dif: 1 },
+                { cod: "727", cargo: "ADMINISTRADOR PUBLICO I", providas: 14, lotacoes: 15, dif: -1 },
                 { cod: "556", cargo: "PSICOLOGO", providas: 28, lotacoes: 27, dif: 1 },
-                { cod: "5409", cargo: "ASSESSOR DE GABINETE I", providas: 56, lotacoes: 57, dif: 1 }
+                { cod: "5409", cargo: "ASSESSOR DE GABINETE I", providas: 56, lotacoes: 57, dif: -1 }
             ],
             "Anexo III": [
-                { cpf: "***.***.***-**", nome: "ADAO STOCHI", escAtual: "Ensino Básico inc.", cargo: "VIGIA", escExigida: "Ensino Básico", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "ADRIANA *** FLORENCIO", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "ADRIANA *** LORENSETTI", escAtual: "Ensino Médio", cargo: "TECNICO EM ENFERMAGEM", escExigida: "Ensino Técnico", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "ALBERTO *** COSTA", escAtual: "Ensino Médio", cargo: "TECNICO DE ELETRICIDADE II", escExigida: "Ensino Técnico", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "ALEXANDRA *** MATOS", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "AMANDA *** SILVA", escAtual: "Ensino Médio", cargo: "TECNICO EM LABORATORIO", escExigida: "Ensino Técnico", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "ANA *** RODRIGUES", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "ANA *** MARQUES", escAtual: "Ensino Médio", cargo: "TECNICO EM ENFERMAGEM", escExigida: "Ensino Técnico", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "ANA *** REGINALDO", escAtual: "Ensino Médio", cargo: "TECNICO EM ENFERMAGEM", escExigida: "Ensino Técnico", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "ANA *** BELINTANI", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "ANA *** FERREIRA", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "ANA *** RODRIGUES", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "ANA *** DIAS", escAtual: "Ensino Médio", cargo: "TECNICO EM ENFERMAGEM", escExigida: "Ensino Técnico", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "ANDRE *** GONCALVES", escAtual: "Ensino Médio", cargo: "PSICOLOGO", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "ANTONIO *** BARRIENTO", escAtual: "Ensino Básico inc.", cargo: "MOTORISTA", escExigida: "Ensino Básico", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "BENEDITA *** FAUSTINO", escAtual: "Ensino Básico", cargo: "TELEFONISTA", escExigida: "Ensino Médio", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "BRUNA *** AMIANTI", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "CAMILA *** MIALICHI", escAtual: "Ensino Médio", cargo: "NUTRICIONISTA", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "CARINA *** VILELA", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "***.***.***-**", nome: "ADAO STOCHI", escAtual: "Ensino Básico inc.", cargo: "VIGIA", escExigida: "Ensino Básico", prov: "Concurso Público" },
+                { cpf: "***.***.***-**", nome: "ADRIANA *** FLORENCIO", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso Público" },
                 { cpf: "***.***.***-**", nome: "CARLOS *** SANTOS", escAtual: "Ensino Médio", cargo: "ASSESSOR EXECUTIVO", escExigida: "Ensino Superior", prov: "Livre Provimento" },
-                { cpf: "***.***.***-**", nome: "CARMEN *** MESSA", escAtual: "Ensino Básico", cargo: "Inspetor de Alunos", escExigida: "Ensino Médio", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "CASSIA *** RECCO", escAtual: "Ensino Médio", cargo: "ASSESSOR EXECUTIVO", escExigida: "Ensino Superior", prov: "Livre Provimento" },
-                { cpf: "***.***.***-**", nome: "CLAUDIO FOSSALUSSA", escAtual: "Ensino Básico inc.", cargo: "ESCRITURARIO II", escExigida: "Ensino Médio", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "CRISTIANE *** ALVES", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "DAIANA *** GISOLDI", escAtual: "Ensino Técnico", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "DAIANA *** PASSARELLA", escAtual: "Ensino Médio", cargo: "PEB II - EDUCACAO ESPECIAL", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "DEBORA *** GOTARDO", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "EDIVALDO *** BONILHA", escAtual: "Ensino Básico inc.", cargo: "MOTORISTA", escExigida: "Ensino Básico", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "EDMUNDO *** FERREIRA", escAtual: "Ensino Médio", cargo: "FISCAL DE OBRAS", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "EDSON *** SILVA", escAtual: "Ensino Básico", cargo: "Escriturario III", escExigida: "Ensino Médio", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "ELIANE *** MONTANHEIRO", escAtual: "Ensino Médio", cargo: "Enfermeiro", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "ERICA *** ALMEIDA", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "ERICA *** CARMO", escAtual: "Ensino Médio", cargo: "ASSISTENTE SOCIAL", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "ERICA *** TOLEDO", escAtual: "Ensino Médio", cargo: "AUXILIAR DE SAUDE BUCAL", escExigida: "Ensino Técnico", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "FABIANA *** CARDOZO", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "FABIANA VERIS", escAtual: "Ensino Médio", cargo: "PEB II - EDUCACAO ESPECIAL", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "FABRICIA *** SILVESTRE", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "FLAVIA *** FERNANDES", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "FLAVIO BERTHOLDO", escAtual: "Ensino Básico", cargo: "SUPERVISOR DE SERVIÇOS", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "***.***.***-**", nome: "DAIANA *** GISOLDI", escAtual: "Ensino Técnico", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso Público" },
                 { cpf: "***.***.***-**", nome: "FLAVIO *** ARANTES", escAtual: "Ensino Médio", cargo: "ASSESSOR EXECUTIVO", escExigida: "Ensino Superior", prov: "Livre Provimento" },
-                { cpf: "***.***.***-**", nome: "FRANCIELE *** OLIVEIRA", escAtual: "Ensino Básico", cargo: "TECNICO EM ENFERMAGEM", escExigida: "Ensino Técnico", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "FRANCINE *** MORAES", escAtual: "Ensino Médio", cargo: "AUXILIAR DE SAUDE BUCAL", escExigida: "Ensino Técnico", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "FRANCISCA *** SANTOS", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "GILBERTO *** RIBEIRO", escAtual: "Ensino Médio", cargo: "FISCAL DE OBRAS", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "GRAZIANA *** GOMES", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "GUILHERME *** FARIA", escAtual: "Ensino Médio", cargo: "ASSESSOR EXECUTIVO", escExigida: "Ensino Superior", prov: "Livre Provimento" },
-                { cpf: "***.***.***-**", nome: "GUSTAVO *** PERRONI", escAtual: "Ensino Médio", cargo: "ASSESSOR EXECUTIVO", escExigida: "Ensino Superior", prov: "Livre Provimento" },
-                { cpf: "***.***.***-**", nome: "IVAN *** KOJIMA", escAtual: "Ensino Médio", cargo: "ADMINISTRADOR PUBLICO I", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "JAQUELINE *** SILVA", escAtual: "Ensino Médio", cargo: "FISCAL AMBIENTAL", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "JOAO *** JUNIOR", escAtual: "Ensino Básico", cargo: "BOMBEIRO MUNICIPAL", escExigida: "Ensino Médio", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "JOAO *** FERREIRA", escAtual: "Ensino Médio", cargo: "ASSESSOR EXECUTIVO", escExigida: "Ensino Superior", prov: "Livre Provimento" },
-                { cpf: "***.***.***-**", nome: "JOAO *** SANDRIN", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "JOAO *** MORELLI", escAtual: "Ensino Médio", cargo: "SEC MUN ZELADORIA/M. AMBIENTE", escExigida: "Ensino Superior", prov: "Livre Provimento" },
-                { cpf: "***.***.***-**", nome: "JOAO *** NARCIZO", escAtual: "Ensino Médio", cargo: "FISCAL DE OBRAS", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "JOSE *** VISU", escAtual: "Ensino Básico", cargo: "MECANICO", escExigida: "Ensino Técnico", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "JOSE *** FILHO", escAtual: "Ensino Médio", cargo: "TECNICO DE ELETRICIDADE I", escExigida: "Ensino Técnico", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "JOSIANE *** SANTOS", escAtual: "Ensino Técnico", cargo: "ASSISTENTE SOCIAL", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "JULIANA *** GONSAGA", escAtual: "Ensino Médio", cargo: "AUXILIAR DE SAUDE BUCAL", escExigida: "Ensino Técnico", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "LEANDRO *** GALLINA", escAtual: "Ensino Médio", cargo: "SEC MUN OBRAS/ENGENHARIA", escExigida: "Ensino Superior", prov: "Livre Provimento" },
-                { cpf: "***.***.***-**", nome: "LIGIA *** LAZARIN", escAtual: "Ensino Técnico", cargo: "ENFERMEIRO - 40 HORAS", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "LUCIMAR *** LOPES", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "LUCINEIA *** RAIMUNDO", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "LUIS *** PUGINA", escAtual: "Ensino Médio", cargo: "PEB II - EDUCACAO FISICA", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "LUIZ *** PEREIRA", escAtual: "Ensino Básico inc.", cargo: "OPERADOR DE MAQUINAS", escExigida: "Ensino Básico", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "LUZIA *** SILVA", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "MARCIA *** GREMASCO", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "MARCIA *** MAGAO", escAtual: "Ensino Médio", cargo: "ASSISTENTE SOCIAL", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "MARCIO *** SILVA", escAtual: "Ensino Médio", cargo: "COMANDANTE", escExigida: "Ensino Superior", prov: "Livre Provimento" },
-                { cpf: "***.***.***-**", nome: "MARI *** OLIVEIRA", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "MARIA *** OLIVEIRA", escAtual: "Ensino Médio", cargo: "TECNICO EM ENFERMAGEM", escExigida: "Ensino Técnico", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "MARIA *** RECCO", escAtual: "Ensino Médio", cargo: "ENGENHEIRO CIVIL", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "MARIA *** BARBOSA", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "MARIA *** ANDREO", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "MARIANE *** GONCALVES", escAtual: "Ensino Médio", cargo: "ASSISTENTE SOCIAL", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "MICHELLI *** TRINDADE", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "NATALINA *** SANTOS", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "NATHALIA *** MORETTI", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "NELSON *** NETO", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "OSMAR *** FERNANDES", escAtual: "Ensino Médio", cargo: "TECNICO EM ENFERMAGEM", escExigida: "Ensino Técnico", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "PAULA *** NASCIMENTO", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "PAULO *** JUNIOR", escAtual: "Ensino Médio", cargo: "FISCAL DE POSTURAS", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "PEDRO *** MELO", escAtual: "Ensino Médio", cargo: "PEB II - EDUCACAO FISICA", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "RAFAELA *** RIBEIRO", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "RAQUEL *** NAVARINI", escAtual: "Ensino Técnico", cargo: "ASSESSOR EXECUTIVO", escExigida: "Ensino Superior", prov: "Livre Provimento" },
-                { cpf: "***.***.***-**", nome: "RAQUEL *** NAVARINI", escAtual: "Ensino Técnico", cargo: "COORDENADOR", escExigida: "Ensino Superior", prov: "Livre Provimento" },
-                { cpf: "***.***.***-**", nome: "ROBERTA *** TIENE", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "RODRIGO *** SOUZA", escAtual: "Ensino Básico inc.", cargo: "Inspetor de Alunos", escExigida: "Ensino Médio", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "ROGERIO *** PEREIRA", escAtual: "Ensino Básico inc.", cargo: "EDUCADOR SANITARIO", escExigida: "Ensino Básico", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "ROSILEIA *** VILLELA", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "ROSILENE *** MARTINS", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "ROSIMEIRE *** CARVALHO", escAtual: "Ensino Médio", cargo: "TECNICO EM ENFERMAGEM", escExigida: "Ensino Técnico", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "SERGIO *** ALVES", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "SILMARA *** SIQUEIRA", escAtual: "Ensino Básico", cargo: "Inspetor de Alunos", escExigida: "Ensino Médio", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "SUELI *** BONILHA", escAtual: "Ensino Básico inc.", cargo: "AUXILIAR SERVICOS OPER. I", escExigida: "Ensino Básico", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "TARLIN *** CITOLINO", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "THAINA *** AGUIAR", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "THAINA *** BARBOSA", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "VALERIA *** SANTOS", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "VALERIA *** OLIVEIRA", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "VANESSA *** MARTINS", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
-                { cpf: "***.***.***-**", nome: "VICTOR *** TORRES", escAtual: "Ensino Médio", cargo: "ADMINISTRADOR PUBLICO I", escExigida: "Ensino Superior", prov: "Concurso público" }
+                { cpf: "***.***.***-**", nome: "JOAO *** MORELLI", escAtual: "Ensino Médio", cargo: "SEC MUN ZELADORIA", escExigida: "Ensino Superior", prov: "Livre Provimento" }
             ]
         };
 
@@ -560,7 +372,7 @@
         };
 
         // ==========================================
-        // 2. CONSTRUÇÃO DO MENU
+        // 2. CONSTRUÇÃO DO MENU E LÓGICA (Mantidos Iguais)
         // ==========================================
         let currentSubmenu = null;
 
@@ -617,9 +429,6 @@
             }
         }
 
-        // ==========================================
-        // 3. NAVEGAÇÃO E LÓGICA DE EXIBIÇÃO
-        // ==========================================
         function resetActiveLinks() {
             document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
             document.querySelectorAll('.submenu-link').forEach(l => l.classList.remove('active'));
@@ -646,7 +455,7 @@
             document.getElementById('page-title').innerText = eixo;
             currentSubmenu = submenu;
 
-            if(eixo.includes("Anexos") || submenu.includes("Item 6")) {
+            if(eixo.includes("Anexos") || submenu.includes("Item 6") || submenu.includes("Item 40") || submenu.includes("Item 42")) {
                 document.getElementById('sec-tabelas').classList.add('active');
                 document.getElementById('btn-voltar-tabela').classList.add('hidden');
                 renderTabelaEspecial(submenu);
@@ -658,9 +467,6 @@
             fecharSidebarMobile();
         }
 
-        // ==========================================
-        // 4. CHECKLIST COM FORMULÁRIOS DIRETOS
-        // ==========================================
         function renderChecklist(submenuSelecionado) {
             const filtroSec = document.getElementById('filtro-secretaria').value;
             const tbody = document.getElementById('checklist-tbody');
@@ -711,12 +517,8 @@
             });
         }
 
-        // ==========================================
-        // 5. INSERÇÃO DIRETA DE TEXTO E JUSTIFICATIVAS
-        // ==========================================
         function visualizarDadosTexto(itemId) {
             const item = bancoDeDados.find(i => i.id === itemId);
-            
             Swal.fire({
                 title: `<span class="text-lg uppercase tracking-wider text-slate-800">${item.id}</span>`,
                 html: `<p class="text-sm font-bold text-slate-600 mb-4">${item.desc}</p>
@@ -728,14 +530,12 @@
             });
         }
 
-        // ==========================================
-        // 6. RENDERIZAÇÃO DE TABELAS DINÂMICAS
-        // ==========================================
         function abrirTabelaItem(itemId) {
             document.querySelectorAll('.section-content').forEach(s => s.classList.remove('active'));
             document.getElementById('sec-tabelas').classList.add('active');
             document.getElementById('btn-voltar-tabela').classList.remove('hidden'); 
-            renderTabelaEspecial(itemId);
+            const submenuTitle = bancoDeDados.find(i => i.id === itemId)?.submenu || itemId;
+            renderTabelaEspecial(submenuTitle);
         }
 
         function voltarParaChecklist() {
@@ -744,11 +544,14 @@
             if (currentSubmenu) renderChecklist(currentSubmenu);
         }
 
+        // ==========================================
+        // RENDERIZAÇÃO DAS TABELAS CEGAS/BLINDADAS
+        // ==========================================
         function renderTabelaEspecial(chave) {
             const container = document.getElementById('container-tabelas-dinamicas');
             let htmlInner = '';
             
-            if(chave.includes("Item 6")) {
+            if(chave.includes("Item 6") || chave.includes("Obras")) {
                 const dados = dadosTabelas["Item 6"];
                 let linhas = dados.map(i => `
                     <tr class="bg-white border-b border-slate-100 hover:bg-slate-50 transition-colors">
@@ -788,7 +591,7 @@
                     </div>
                 `;
             } 
-            else if(chave.includes("Item 40")) {
+            else if(chave.includes("Item 40") || chave.includes("Agentes")) {
                 const dados = dadosTabelas["Item 40"];
                 let linhas = dados.map(i => `
                     <tr class="bg-white border-b border-slate-100 hover:bg-slate-50">
@@ -822,7 +625,7 @@
                     </div>
                 `;
             }
-            else if(chave.includes("Item 42")) {
+            else if(chave.includes("Item 42") || chave.includes("Contratações")) {
                 const dados = dadosTabelas["Item 42"];
                 let linhas = dados.map(i => `
                     <tr class="bg-white border-b border-slate-100 hover:bg-slate-50">
@@ -861,27 +664,29 @@
             else if(chave === "Anexo III" || chave.includes("Escolaridade") || chave.includes("Anexo III -")) {
                 let linhas = dadosTabelas["Anexo III"].map(i => `
                     <tr class="bg-white border-b border-slate-100 hover:bg-slate-50">
-                        <td class="p-3 border-r text-center font-mono whitespace-nowrap">${i.cpf}</td>
-                        <td class="p-3 border-r truncate max-w-[200px]"><strong>${i.nome}</strong><br><span class="text-[10px] text-slate-500">${i.cargo}</span></td>
-                        <td class="p-3 border-r text-center text-rose-600 font-bold">${i.escAtual}</td>
-                        <td class="p-3 border-r text-center font-bold text-slate-700">${i.escExigida}</td>
+                        <td class="p-3 border-r text-center font-mono whitespace-nowrap text-xs">${i.cpf}</td>
+                        <td class="p-3 border-r truncate max-w-[200px] text-xs"><strong>${i.nome}</strong><br><span class="text-[10px] text-slate-500">${i.cargo}</span></td>
+                        <td class="p-3 border-r text-center text-rose-600 font-bold text-xs">${i.escAtual}</td>
+                        <td class="p-3 border-r text-center font-bold text-slate-700 text-xs">${i.escExigida}</td>
+                        <td class="p-3 border-r text-center text-blue-700 font-semibold text-xs">${i.prov}</td>
                         <td class="p-3 text-[11px] text-slate-400 text-center">-</td>
                     </tr>
                 `).join('');
 
                 htmlInner = `
                     <div class="bg-slate-100 px-5 py-4 border-b flex justify-between items-center gap-2">
-                        <h3 class="text-sm font-bold text-slate-800 uppercase">Anexo III - Incompatibilidade de Escolaridade (101 Registros)</h3>
+                        <h3 class="text-sm font-bold text-slate-800 uppercase">Anexo III - Incompatibilidade de Escolaridade</h3>
                     </div>
                     <div class="overflow-x-auto p-4 bg-white">
-                        <table class="w-full text-left border-collapse border min-w-[900px] text-xs">
+                        <table class="w-full text-left border-collapse border min-w-[1000px] text-xs">
                             <thead class="bg-slate-800 text-white text-[10px] uppercase">
                                 <tr>
                                     <th class="p-3 border w-28 text-center">CPF</th>
                                     <th class="p-3 border">Servidor / Cargo</th>
                                     <th class="p-3 border w-32 text-center text-rose-500">Escolaridade Servidor</th>
                                     <th class="p-3 border w-32 text-center">Escolaridade Exigida</th>
-                                    <th class="p-3 border w-56 text-center">Plano de Correção / Justificativa</th>
+                                    <th class="p-3 border w-36 text-center text-blue-300">Tipo Provimento</th>
+                                    <th class="p-3 border w-48 text-center">Plano de Correção</th>
                                 </tr>
                             </thead>
                             <tbody>${linhas}</tbody>
@@ -896,7 +701,7 @@
                         <td class="p-3 border-r font-bold text-slate-700">${i.cargo}</td>
                         <td class="p-3 border-r text-center">${i.providas}</td>
                         <td class="p-3 border-r text-center">${i.lotacoes}</td>
-                        <td class="p-3 border-r text-center text-rose-600 font-bold">${i.dif}</td>
+                        <td class="p-3 border-r text-center text-rose-600 font-bold">${i.dif > 0 ? '+'+i.dif : i.dif}</td>
                         <td class="p-3 text-[11px] text-slate-400 text-center">-</td>
                     </tr>
                 `).join('');
@@ -910,10 +715,10 @@
                             <thead class="bg-slate-800 text-white text-[10px] uppercase">
                                 <tr>
                                     <th class="p-3 border w-20 text-center">Cód. Cargo</th>
-                                    <th class="p-3 border">Cargo</th>
+                                    <th class="p-3 border">Cargo Efetivo/Comissão</th>
                                     <th class="p-3 border w-24 text-center">Vagas Providas</th>
                                     <th class="p-3 border w-24 text-center">Lotações Reais</th>
-                                    <th class="p-3 border w-24 text-center text-rose-500">Diferença</th>
+                                    <th class="p-3 border w-24 text-center text-rose-500">Diferença / Déficit</th>
                                     <th class="p-3 border w-56 text-center">Justificativa da Divergência</th>
                                 </tr>
                             </thead>
@@ -928,26 +733,28 @@
                         <td class="p-3 border-r text-slate-600 font-bold text-center">${i.emp}</td>
                         <td class="p-3 border-r text-slate-700 truncate max-w-[200px]" title="${i.credor}">${i.credor} <br><span class="text-[9px] text-slate-400 uppercase font-normal">${i.mod}</span></td>
                         <td class="p-3 border-r text-slate-600 text-[11px]">${i.hist}</td>
-                        <td class="p-3 border-r text-center text-slate-500 whitespace-nowrap">${i.data}</td>
-                        <td class="p-3 border-r text-right font-medium text-slate-700 whitespace-nowrap">R$ ${i.valorPago}</td>
-                        <td class="p-3 text-[11px] text-slate-400 text-center">-</td>
+                        <td class="p-3 border-r text-right font-medium text-slate-600 whitespace-nowrap">R$ ${i.valorEmp}</td>
+                        <td class="p-3 border-r text-right font-medium text-slate-600 whitespace-nowrap">R$ ${i.valorLiq}</td>
+                        <td class="p-3 border-r text-right font-bold text-blue-700 whitespace-nowrap">R$ ${i.valorPago}</td>
+                        <td class="p-3 text-[11px] text-slate-400 text-center cursor-pointer hover:text-blue-600" onclick="alert('Funcionalidade de upload na nuvem indisponível no modo de visualização.')"><i class="fa-solid fa-cloud-arrow-up"></i> Anexar NF</td>
                     </tr>
                 `).join('');
 
                 htmlInner = `
                     <div class="bg-slate-100 px-5 py-4 border-b flex justify-between items-center gap-2">
-                        <h3 class="text-sm font-bold text-slate-800 uppercase">Anexo I - Amostra de Empenhos (53 Registros)</h3>
+                        <h3 class="text-sm font-bold text-slate-800 uppercase">Anexo I - Amostra de Empenhos (Auditoria TCE)</h3>
                     </div>
                     <div class="overflow-x-auto p-4 bg-white">
-                        <table class="w-full text-left border-collapse border min-w-[900px] text-xs">
+                        <table class="w-full text-left border-collapse border min-w-[1000px] text-xs">
                             <thead class="bg-slate-800 text-white text-[10px] uppercase">
                                 <tr>
-                                    <th class="p-3 border w-20 text-center">Empenho</th>
-                                    <th class="p-3 border">Credor / Modalidade</th>
+                                    <th class="p-3 border w-16 text-center">Nº Emp.</th>
+                                    <th class="p-3 border">Fornecedor / Modalidade</th>
                                     <th class="p-3 border w-48">Histórico Resumido</th>
-                                    <th class="p-3 border w-24 text-center">Data Emissão</th>
-                                    <th class="p-3 border w-28 text-right">Valor Pago</th>
-                                    <th class="p-3 border w-48 text-center">Justificativa da Despesa / Objeto</th>
+                                    <th class="p-3 border w-24 text-right">Vl. Empenhado</th>
+                                    <th class="p-3 border w-24 text-right">Vl. Liquidado</th>
+                                    <th class="p-3 border w-24 text-right text-blue-300">Vl. Pago</th>
+                                    <th class="p-3 border w-24 text-center">Comprovante</th>
                                 </tr>
                             </thead>
                             <tbody>${linhas}</tbody>
@@ -960,7 +767,7 @@
         }
 
         // ==========================================
-        // 7. DASHBOARDS
+        // 7. DASHBOARDS E GRÁFICOS
         // ==========================================
         let chartSecretariasInstance = null;
 
@@ -1043,7 +850,7 @@
 
             const total = itensRegulares.length;
             const concluidos = itensRegulares.filter(i => i.status === 'Concluido').length;
-            const pendentes = itensRegulares.filter(i => i.status === 'Pendente').length;
+            const pendentes = itensRegulares.filter(i => i.status === 'Pendente' || i.status === 'Especial').length;
 
             const perc = total > 0 ? Math.round((concluidos / total) * 100) : 0;
 
