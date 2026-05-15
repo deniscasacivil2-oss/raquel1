@@ -135,7 +135,7 @@
                         </div>
                         <div class="relative z-10">
                             <h3 class="text-base sm:text-lg font-black text-amber-900 uppercase tracking-wider mb-4 flex items-center gap-2">
-                                <i class="fa-regular fa-clock text-amber-600"></i> Prazo de Entrega: 08/06/2026
+                                <i class="fa-regular fa-clock text-amber-600"></i> Prazo de Entrega Fatal: 08/06/2026
                             </h3>
                             <div class="text-xs sm:text-sm text-amber-900 space-y-3">
                                 <p class="font-bold">Atenção às regras de submissão documental do TCESP:</p>
@@ -264,7 +264,7 @@
             { id: "Item 15", eixo: "Gestão Financeira e Contábil", submenu: "Receita e Dívida Ativa", desc: "Saldos da Dívida Ativa (Comparativo 2024 vs 2025)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
             { id: "Item 16", eixo: "Gestão Financeira e Contábil", submenu: "Receita e Dívida Ativa", desc: "Relatório de Inscrições e Cancelamentos por Prescrição", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
             { id: "Item 17", eixo: "Gestão Financeira e Contábil", submenu: "Receita e Dívida Ativa", desc: "Isenções, anistias e remissões (Base Legal LRF)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "Item 18", eixo: "Gestão Financeira e Contábil", submenu: "Receita e Dívida Ativa", desc: "ISS sobre Cartórios (Relatórios de Arrecadação)", secretaria: "FINANCAS", status: "Concluido", tipo: "texto", dados: "Relatório gerado." },
+            { id: "Item 18", eixo: "Gestão Financeira e Contábil", submenu: "Receita e Dívida Ativa", desc: "ISS sobre Cartórios (Relatórios de Arrecadação)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
             { id: "Item 19", eixo: "Gestão Financeira e Contábil", submenu: "Obrigações e Parcelamentos", desc: "Previdenciário (INSS/RPPS): Comprovantes de Pagamento", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
             { id: "Item 20", eixo: "Gestão Financeira e Contábil", submenu: "Obrigações e Parcelamentos", desc: "FGTS/PASEP: Guias e Termos de Parcelamentos", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
             { id: "Item 21", eixo: "Gestão Financeira e Contábil", submenu: "Obrigações e Parcelamentos", desc: "Repasses LDB (Art. 69): Saldo Restos a Pagar", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
@@ -289,7 +289,7 @@
 
             // EIXO 4: Gestão de Pessoal (RH) (15 itens)
             { id: "Item 38", eixo: "Gestão de Pessoal (RH)", submenu: "Agentes Políticos", desc: "Declarações de Bens (Prefeito, Vice e Secretários)", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
-            { id: "Item 39", eixo: "Gestão de Pessoal (RH)", submenu: "Agentes Políticos", desc: "Cadastro CadTCESP (Comprovantes)", secretaria: "RH", status: "Concluido", tipo: "texto", dados: "Atualizado no TCESP." },
+            { id: "Item 39", eixo: "Gestão de Pessoal (RH)", submenu: "Agentes Políticos", desc: "Cadastro CadTCESP (Comprovantes)", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
             { id: "Item 40", eixo: "Gestão de Pessoal (RH)", submenu: "Agentes Políticos", desc: "Relação de Comissionados: Nomeações e Exonerações", secretaria: "RH", status: "Pendente", tipo: "tabela", dados: "" },
             { id: "Item 41", eixo: "Gestão de Pessoal (RH)", submenu: "Agentes Políticos", desc: "Certificação de Acúmulo de Cargos", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
             { id: "Item 42", eixo: "Gestão de Pessoal (RH)", submenu: "Quadro e Folha", desc: "Contratações Temporárias (Editais e Listas)", secretaria: "RH", status: "Pendente", tipo: "tabela", dados: "" },
@@ -329,17 +329,32 @@
             { id: "Anexo III", eixo: "Auditoria de Conformidade (Anexos)", submenu: "Anexo III - Incompatibilidade de Escolaridade", desc: "Plano de Correção de registros de escolaridade funcional", secretaria: "RH", status: "Especial", tipo: "tabela", dados: "" }
         ];
 
-        // ESTRUTURA DE DADOS DAS TABELAS
+        // ESTRUTURA DE DADOS DAS TABELAS (ATUALIZADO COM SEUS DADOS REAIS)
         const dadosTabelas = {
             "Item 6": [], 
-            "Item 40": [
-                { cod: "5447", cargo: "Assessor Executivo", nome: "Carlos *** Santos", dtNom: "05/01/2025", dtExo: "-", lei: "Lei Municipal nº 3.450/2020" }
-            ],
-            "Item 42": [
-                { cod: "260", cargo: "Professor Ed. Básica I", nome: "Ana *** Ferreira", dtAdm: "01/02/2025", dtDesl: "-", ativo: "SIM", prov: "Processo Seletivo nº 01/2024" }
-            ],
+            "Item 40": [],
+            "Item 42": [],
             "Anexo I": [
-                { emp: "1716", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "SERVICO DE RECEPCAO E ATENDIMENTO 44 HORAS SEMANAIS DIURNO", valorEmp: "106.196,27", valorLiq: "92.514,99", valorPago: "92.514,99" },
+                { emp: "169", data: "07/01/2025", credor: "SUPRASERV SERVICO AVANCADO LTDA", mod: "PREGÃO ELETRÔNICO", hist: "SERVICO DE LIMPEZA PREDIAL PARA ATENDER AS NECESSIDADES DASSECRETARIAS", valorEmp: "42.398,42", valorLiq: "38.472,67", valorPago: "38.472,67" },
+                { emp: "218", data: "10/01/2025", credor: "JOSEPH ROSSI EMPREENDIMENTOS IMOBILIARIO", mod: "DISPENSA DE LICITA", hist: "LOCACAO DE IMOVEL PARA INSTALACAO DE SECRETARIAS PROJETOS E DEPENDENC", valorEmp: "42.103,92", valorLiq: "42.103,92", valorPago: "40.939,88" },
+                { emp: "221", data: "13/01/2025", credor: "PLANERGI URBANIZACAO SERVICOS EIRELI", mod: "PREGÃO ELETRÔNICO", hist: "PRESTACAO DE SERVICOS ESPECIALIZADOS EM PRODUCAO E MANUTENCAO DE MUDAS", valorEmp: "41.425,56", valorLiq: "41.425,56", valorPago: "41.425,56" },
+                { emp: "244", data: "14/01/2025", credor: "JOSEPH ROSSI EMPREENDIMENTOS IMOBILIARIO", mod: "DISPENSA DE LICITA", hist: "LOCACAO DE UM IMOVEL PARA REALOCACAO DA FARMACIA MUNICIPAL LOCALIZAD", valorEmp: "91.200,00", valorLiq: "91.200,00", valorPago: "84.937,60" },
+                { emp: "246", data: "14/01/2025", credor: "CONSTROESTE CONSTRUTORA E PARTICIPACOES", mod: "PREGÃO ELETRÔNICO", hist: "CONTRATACAO DE EMPRESA PARA SERVICO DE COLETA TRANSPORTE TRATAMENTO", valorEmp: "103.975,14", valorLiq: "103.975,14", valorPago: "103.975,14" },
+                { emp: "305", data: "14/01/2025", credor: "SILVIO ROBERTO BUCK DE OLIVEIRA ME", mod: "PREGÃO PRESENCIAL", hist: "CONTRATACAO DE SERVICOS CONTINUADOS DE MANUTENCAO DOS VEICULOS LEVES", valorEmp: "54.442,45", valorLiq: "53.744,54", valorPago: "53.744,54" },
+                { emp: "318", data: "15/01/2025", credor: "SILVIO ROBERTO BUCK DE OLIVEIRA ME", mod: "PREGÃO PRESENCIAL", hist: "SERVICO DE FORNECIMENTO DE PECAS DE VEICULOS DE PEQUENO PORTE", valorEmp: "172.245,56", valorLiq: "152.462,81", valorPago: "152.462,81" },
+                { emp: "363", data: "20/01/2025", credor: "CATSARA PETSHOP LTDA ME", mod: "PREGÃO ELETRÔNICO", hist: "RACAO PARA CAES 20 QUILOS RACAO PARA GATOS FILHOTES 20 QUILOS RACAO PA", valorEmp: "54.400,00", valorLiq: "54.400,00", valorPago: "54.400,00" },
+                { emp: "449", data: "23/01/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "SERVICO EM PORTARIA PATRIMONIAL E CONTROLADOR DE ACESSO POSTO DE SER", valorEmp: "60.226,28", valorLiq: "60.226,28", valorPago: "60.226,28" },
+                { emp: "499", data: "24/01/2025", credor: "CIRURGICA UNIAO LTDA", mod: "PREGÃO ELETRÔNICO", hist: "MEPILEX TRANSFER 20X50 CM CURATIVO CAIXA C 4 UNIDADES ACAO JUDIC", valorEmp: "132.000,00", valorLiq: "132.000,00", valorPago: "132.000,00" },
+                { emp: "594", data: "27/01/2025", credor: "V2 INTEGRADORA DE SOLUCOES E IMPORTACOES", mod: "PREGÃO ELETRÔNICO", hist: "SERVICO DE MONITORAMENTO DE ALARME", valorEmp: "21.727,86", valorLiq: "20.454,88", valorPago: "20.454,88" },
+                { emp: "804", data: "28/01/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "VENCIMENT C FOLHA PAGAMENTO", valorEmp: "44.751,48", valorLiq: "44.751,48", valorPago: "44.751,48" },
+                { emp: "1420", data: "11/02/2025", credor: "CIRURGICA VITORIA COMERCIO DE MEDICAMENT", mod: "PREGÃO ELETRÔNICO", hist: "KIT DENGUE IGG E IGM IMUNOENSAIO CROMOTOGRAFICO RAPIDO PARA DETECCA", valorEmp: "37.548,00", valorLiq: "37.548,00", valorPago: "37.548,00" },
+                { emp: "1572", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "SERVICO EM PORTARIA PATRIMONIAL E CONTROLADOR DE ACESSO POSTO DE SER", valorEmp: "260.046,28", valorLiq: "254.374,10", valorPago: "254.374,10" },
+                { emp: "1575", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "SERVICO EM PORTARIA PATRIMONIAL E CONTROLADOR DE ACESSO POSTO DE SER", valorEmp: "232.358,98", valorLiq: "194.717,55", valorPago: "194.717,55" },
+                { emp: "1603", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "SERVICO DE RECEPCAO E ATENDIMENTO 44 HORAS SEMANAIS DIURNO", valorEmp: "135.970,43", valorLiq: "108.595,74", valorPago: "108.595,74" },
+                { emp: "1605", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "SERVICO DE RECEPCAO POSTO DE SERVICO DE 24 HRS PERIODO DIUTURNO", valorEmp: "434.434,21", valorLiq: "400.858,80", valorPago: "400.858,80" },
+                { emp: "1613", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "SERVICO DE RECEPCAO E ATENDIMENTO 44 HORAS SEMANAIS DIURNO SERVICO", valorEmp: "101.977,82", valorLiq: "59.378,11", valorPago: "59.378,11" },
+                { emp: "1620", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "SERVICO EM PORTARIA PATRIMONIAL E CONTROLADOR DE ACESSO POSTO DE SER", valorEmp: "85.864,79", valorLiq: "69.352,33", valorPago: "69.352,33" },
+                { emp: "1716", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "SERVICO DE RECEPCAO E ATENDIMENTO 44 HORAS SEMANAIS DIURNO SERVICO", valorEmp: "106.196,27", valorLiq: "92.514,99", valorPago: "92.514,99" },
                 { emp: "2337", data: "28/02/2025", credor: "ASSIST COMERCIO E SERVICOS LTDA EPP", mod: "PREGÃO ELETRÔNICO", hist: "POSTO DE SERVICO DE ATENDENTES CALL CENTER DE 8 FUNCIONARIOS 12 HORA", valorEmp: "214.500,00", valorLiq: "214.500,00", valorPago: "214.500,00" },
                 { emp: "2346", data: "28/02/2025", credor: "ARHO SERVICOS DE APOIO EMPRESARIAL LTDA", mod: "PREGÃO ELETRÔNICO", hist: "MOTORISTA PARA EXECUCAO DE TRANSPORTES PARA SEC DE SAUDE POSTO DE SE", valorEmp: "496.858,18", valorLiq: "469.508,19", valorPago: "469.508,19" },
                 { emp: "2347", data: "28/02/2025", credor: "ASSIST COMERCIO E SERVICOS LTDA EPP", mod: "PREGÃO ELETRÔNICO", hist: "LICENCA DE USO DE SISTEMA INFORMATIZADO DE GERENCIAMENTO DEATENDIMENTO", valorEmp: "110.500,00", valorLiq: "110.500,00", valorPago: "110.500,00" },
@@ -660,8 +675,10 @@
 
                 if (item.status === 'Pendente') {
                     badgeStatus = `<span class="px-2 py-1 rounded text-[10px] font-bold uppercase status-pendente"><i class="fa-solid fa-circle-exclamation mr-1"></i> Pendente</span>`;
-                } else {
+                } else if (item.status === 'Concluido') {
                     badgeStatus = `<span class="px-2 py-1 rounded text-[10px] font-bold uppercase status-concluido"><i class="fa-solid fa-check-double mr-1"></i> Concluído</span>`;
+                } else {
+                    badgeStatus = `<span class="px-2 py-1 rounded text-[10px] font-bold uppercase bg-slate-100 text-slate-600 border border-slate-300"><i class="fa-solid fa-table mr-1"></i> Requisito de Dados</span>`;
                 }
 
                 if (item.tipo === 'tabela') {
@@ -789,7 +806,7 @@
                                     <th class="p-3 border">Legislação com Atribuições</th>
                                 </tr>
                             </thead>
-                            <tbody>${linhas}</tbody>
+                            <tbody>${linhas || `<tr><td colspan="6" class="p-6 text-center text-slate-500 text-xs font-medium bg-slate-50/50">Nenhum dado inserido.</td></tr>`}</tbody>
                         </table>
                     </div>
                 `;
@@ -825,13 +842,14 @@
                                     <th class="p-3 border">Provimento (Seletivo nº)</th>
                                 </tr>
                             </thead>
-                            <tbody>${linhas}</tbody>
+                            <tbody>${linhas || `<tr><td colspan="7" class="p-6 text-center text-slate-500 text-xs font-medium bg-slate-50/50">Nenhum dado inserido.</td></tr>`}</tbody>
                         </table>
                     </div>
                 `;
             }
             else if(chave === "Anexo III" || chave.includes("Escolaridade") || chave.includes("Anexo III -")) {
-                let linhas = dadosTabelas["Anexo III"].map(i => `
+                const dados = dadosTabelas["Anexo III"];
+                let linhas = dados.map(i => `
                     <tr class="bg-white border-b border-slate-100 hover:bg-slate-50">
                         <td class="p-3 border-r text-center font-mono whitespace-nowrap text-[10px] sm:text-xs text-slate-400">${i.cpf}</td>
                         <td class="p-3 border-r truncate max-w-[150px] sm:max-w-[200px] text-xs"><strong>${i.nome}</strong><br><span class="text-[9px] sm:text-[10px] text-slate-500">${i.cargo}</span></td>
@@ -844,7 +862,7 @@
 
                 htmlInner = `
                     <div class="bg-slate-100 px-5 py-4 border-b flex justify-between items-center gap-2">
-                        <h3 class="text-sm font-bold text-slate-800 uppercase">Anexo III - Incompatibilidade de Escolaridade (${dadosTabelas["Anexo III"].length} Registros)</h3>
+                        <h3 class="text-sm font-bold text-slate-800 uppercase">Anexo III - Incompatibilidade de Escolaridade (${dados.length} Itens)</h3>
                     </div>
                     <div class="overflow-x-auto p-4 bg-white">
                         <div class="max-h-[500px] overflow-y-auto border border-slate-200">
@@ -859,14 +877,15 @@
                                         <th class="p-3 border-b border-slate-700 w-48 text-center">Plano de Correção</th>
                                     </tr>
                                 </thead>
-                                <tbody>${linhas}</tbody>
+                                <tbody>${linhas || `<tr><td colspan="6" class="p-6 text-center text-slate-500 text-xs font-medium">Nenhum dado inserido.</td></tr>`}</tbody>
                             </table>
                         </div>
                     </div>
                 `;
             }
             else if(chave === "Anexo II" || chave.includes("Divergência") || chave.includes("Anexo II -")) {
-                let linhas = dadosTabelas["Anexo II"].map(i => `
+                const dados = dadosTabelas["Anexo II"];
+                let linhas = dados.map(i => `
                     <tr class="bg-white border-b border-slate-100 hover:bg-slate-50">
                         <td class="p-3 border-r text-center font-mono">${i.cod}</td>
                         <td class="p-3 border-r font-bold text-slate-700">${i.cargo}</td>
@@ -893,13 +912,14 @@
                                     <th class="p-3 border w-56 text-center">Justificativa da Divergência</th>
                                 </tr>
                             </thead>
-                            <tbody>${linhas}</tbody>
+                            <tbody>${linhas || `<tr><td colspan="6" class="p-6 text-center text-slate-500 text-xs font-medium bg-slate-50/50">Nenhum dado inserido.</td></tr>`}</tbody>
                         </table>
                     </div>
                 `;
             }
             else if(chave === "Anexo I" || chave.includes("Empenhos") || chave.includes("Anexo I -")) {
-                let linhas = dadosTabelas["Anexo I"].map(i => `
+                const dados = dadosTabelas["Anexo I"];
+                let linhas = dados.map(i => `
                     <tr class="bg-white border-b border-slate-100 hover:bg-slate-50">
                         <td class="p-3 border-r text-slate-600 font-bold text-center">${i.emp}</td>
                         <td class="p-3 border-r text-slate-700 truncate max-w-[200px]" title="${i.credor}">${i.credor} <br><span class="text-[9px] text-slate-400 uppercase font-normal">${i.mod}</span></td>
@@ -907,13 +927,13 @@
                         <td class="p-3 border-r text-right font-medium text-slate-600 whitespace-nowrap">R$ ${i.valorEmp}</td>
                         <td class="p-3 border-r text-right font-medium text-slate-600 whitespace-nowrap">R$ ${i.valorLiq}</td>
                         <td class="p-3 border-r text-right font-bold text-blue-700 whitespace-nowrap">R$ ${i.valorPago}</td>
-                        <td class="p-3 text-[10px] sm:text-[11px] text-slate-400 text-center cursor-pointer hover:text-blue-600" onclick="alert('Funcionalidade indisponível no modo de visualização.')"><i class="fa-solid fa-cloud-arrow-up"></i> Anexar NF</td>
+                        <td class="p-3 text-[10px] sm:text-[11px] text-slate-400 text-center cursor-pointer hover:text-blue-600"><i class="fa-solid fa-cloud-arrow-up"></i> Anexar NF</td>
                     </tr>
                 `).join('');
 
                 htmlInner = `
                     <div class="bg-slate-100 px-5 py-4 border-b flex justify-between items-center gap-2">
-                        <h3 class="text-sm font-bold text-slate-800 uppercase">Anexo I - Amostra de Empenhos (${dadosTabelas["Anexo I"].length} Registros)</h3>
+                        <h3 class="text-sm font-bold text-slate-800 uppercase">Anexo I - Amostra de Empenhos (${dados.length} Itens)</h3>
                     </div>
                     <div class="overflow-x-auto p-4 bg-white">
                         <div class="max-h-[500px] overflow-y-auto border border-slate-200">
@@ -929,7 +949,7 @@
                                         <th class="p-3 border-b border-slate-700 w-24 text-center">Comprovante</th>
                                     </tr>
                                 </thead>
-                                <tbody>${linhas}</tbody>
+                                <tbody>${linhas || `<tr><td colspan="7" class="p-6 text-center text-slate-500 text-xs font-medium bg-slate-50/50">Nenhum empenho inserido.</td></tr>`}</tbody>
                             </table>
                         </div>
                     </div>
@@ -966,8 +986,8 @@
                 itensFiltrados = itens.filter(i => i.status !== 'Concluido');
             }
 
-            if (itensFiltrados.length === 0) {
-                Swal.fire('Vazio', 'Não existem dados correspondentes a este filtro.', 'info');
+            if (itensFiltrados.length === 0 && tipo !== 'total') {
+                Swal.fire('Vazio', 'Não existem requisitos concluídos com os filtros atuais.', 'info');
                 return;
             }
 
