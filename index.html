@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel TC-006641.989.24 - Olímpia</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- SweetAlert2 para Alertas Modernos e Formulários de Texto -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; color: #1e293b; }
+        .sidebar-bg { background-color: #0f172a; } 
+        .card { background: white; border-radius: 8px; box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); border: 1px solid #e2e8f0; }
+        
+        .nav-link { transition: all 0.2s; border-radius: 6px; cursor: pointer; }
+        .nav-link:hover { background-color: rgba(255,255,255,0.05); }
+        .nav-link.active { background-color: #2563eb; color: #ffffff !important; font-weight: 600; }
+        
+        .submenu-wrapper { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease-in-out; }
+        .submenu-wrapper.open { grid-template-rows: 1fr; }
+        .submenu-inner { overflow: hidden; }
+        
+        .submenu-link { 
+            display: block; 
+            padding: 10px 12px 10px 20px; 
+            font-size: 11px; 
+            color: #94a3b8; 
+            transition: all 0.2s; 
+            cursor: pointer; 
+            border-radius: 0 6px 6px 0; 
+            margin-bottom: 2px;
+            border-left: 2px solid transparent;
+            line-height: 1.4;
+        }
+        .submenu-link:hover { color: #f8fafc; background-color: rgba(255,255,255,0.05); }
+        .submenu-link.active { color: #38bdf8; font-weight: 600; border-left: 2px solid #38bdf8; background-color: rgba(56, 189, 248, 0.1); }
+
+        .section-content { display: none; }
+        .section-content.active { display: block; animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .sidebar-scrollbar::-webkit-scrollbar { width: 4px; }
+        .sidebar-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .sidebar-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        .sidebar-scrollbar::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+        .status-pendente { background-color: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+        .status-concluido { background-color: #dcfce3; color: #166534; border: 1px solid #86efac; }
+    </style>
+</head>
+<body class="flex min-h-screen overflow-hidden">
+
+    <!-- Menu Lateral -->
+    <aside id="sidebar" class="sidebar-bg text-slate-300 flex-shrink-0 transition-all duration-300 w-72 h-screen z-50 overflow-hidden relative shadow-xl md:shadow-none">
+        <div class="w-72 flex flex-col h-full absolute top-0 left-0">
+            <div class="p-6 border-b border-slate-800 bg-slate-900/50 flex items-center gap-4 shrink-0">
+                <div class="bg-white p-1 rounded inline-block shadow-lg shrink-0">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Bras%C3%A3o_de_Ol%C3%ADmpia%2C_SP.jpg" alt="Brasão" class="h-10">
+                </div>
+                <div>
+                    <h2 class="text-xs font-bold tracking-widest uppercase text-white leading-tight">Req. 266/2026</h2>
+                    <p class="text-[10px] text-blue-400 mt-0.5 uppercase font-medium">TC-006641.989.24</p>
+                </div>
+            </div>
+            
+            <nav class="flex-grow p-4 space-y-1 overflow-y-auto sidebar-scrollbar" id="menu-container">
+                <button onclick="showDashboard()" class="nav-link w-full flex items-center p-3 text-slate-300 text-left mb-4 active group" id="btn-visao-geral">
+                    <i class="fa-solid fa-chart-pie text-lg w-6 text-center shrink-0 opacity-70 group-hover:opacity-100 transition-opacity"></i>
+                    <span class="text-[11px] font-bold tracking-wider uppercase leading-snug flex-1 ml-3">Painel Geral</span>
+                </button>
+                <!-- Menus Gerados via JS -->
+            </nav>
+
+            <div class="p-5 bg-slate-950 text-[10px] text-slate-400 border-t border-slate-800 flex justify-between items-center shrink-0">
+                <div>
+                    <p class="font-bold text-slate-300">Casa Civil - Olímpia</p>
+                    <p>Prazo Fatal: 08/06/2026</p>
+                </div>
+                <i class="fa-solid fa-cloud-arrow-up text-green-500 animate-pulse" title="Sincronizado na Nuvem"></i>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Área Principal -->
+    <main class="flex-grow flex flex-col min-w-0 w-full h-screen overflow-hidden bg-slate-50 relative">
+        
+        <!-- Header -->
+        <header class="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-4 md:px-6 shrink-0 shadow-sm z-40">
+            <div class="flex items-center space-x-4">
+                <button onclick="toggleSidebar()" class="text-slate-500 hover:text-blue-600 focus:outline-none p-2 rounded hover:bg-slate-100 transition-colors">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+                <div class="flex items-center gap-3">
+                    <h1 id="page-title" class="text-sm md:text-lg font-bold text-slate-800 uppercase tracking-tight truncate max-w-[200px] md:max-w-none">Painel Geral de Auditoria</h1>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="hidden md:flex items-center bg-slate-100 rounded-md px-3 py-1.5 border border-slate-200">
+                    <i class="fa-solid fa-filter text-slate-400 text-xs mr-2"></i>
+                    <select id="filtro-secretaria" onchange="aplicarFiltroSecretaria()" class="bg-transparent text-xs font-bold text-slate-700 outline-none cursor-pointer uppercase">
+                        <option value="TODAS">Todas as Secretarias</option>
+                        <option value="CASA_CIVIL">Casa Civil</option>
+                        <option value="FINANCAS">Finanças / Contabilidade</option>
+                        <option value="RH">Recursos Humanos (RH)</option>
+                        <option value="EDUCACAO">Educação</option>
+                        <option value="SAUDE">Saúde</option>
+                        <option value="JURIDICO">Procuradoria / Jurídico</option>
+                    </select>
+                </div>
+
+                <div class="h-8 border-l border-slate-200 hidden md:block"></div>
+
+                <div class="text-right hidden sm:block">
+                    <p class="text-[10px] text-rose-600 font-bold uppercase tracking-wider"><i class="fa-regular fa-clock"></i> Limite: 08 Jun</p>
+                    <p class="text-xs font-bold text-slate-700">Contas 2025</p>
+                </div>
+            </div>
+        </header>
+
+        <!-- Container de Conteúdo -->
+        <div class="flex-grow overflow-y-auto p-4 md:p-6 pb-20" id="main-content">
+            
+            <!-- SEÇÃO: VISÃO GERAL -->
+            <section id="sec-visao-geral" class="section-content active">
+                <div class="max-w-7xl mx-auto space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                        <div onclick="abrirDetalhesKpi('total')" class="card p-5 border-l-4 border-slate-800 bg-white cursor-pointer hover:shadow-md transition-all hover:-translate-y-0.5">
+                            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Total de Requisitos</p>
+                            <h3 class="text-3xl font-black text-slate-800" id="kpi-total">0</h3>
+                        </div>
+                        <div onclick="abrirDetalhesKpi('concluido')" class="card p-5 border-l-4 border-green-500 bg-green-50/30 cursor-pointer hover:shadow-md transition-all hover:-translate-y-0.5">
+                            <p class="text-[10px] font-bold text-green-700 uppercase tracking-wider mb-1">Dados Preenchidos</p>
+                            <h3 class="text-3xl font-black text-green-700" id="kpi-concluido">0</h3>
+                        </div>
+                        <div onclick="abrirDetalhesKpi('pendente')" class="card p-5 border-l-4 border-rose-500 bg-rose-50/30 cursor-pointer hover:shadow-md transition-all hover:-translate-y-0.5">
+                            <p class="text-[10px] font-bold text-rose-700 uppercase tracking-wider mb-1">Ação Imediata (Pendentes)</p>
+                            <h3 class="text-3xl font-black text-rose-700" id="kpi-pendente">0</h3>
+                        </div>
+                        <div onclick="abrirDetalhesKpi('progresso')" class="card p-5 border-l-4 border-blue-500 flex flex-col justify-center cursor-pointer hover:shadow-md transition-all hover:-translate-y-0.5">
+                            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-2">Progresso de Inserção</p>
+                            <div class="w-full bg-slate-200 rounded-full h-2.5 mb-1">
+                                <div id="kpi-progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-700" style="width: 0%"></div>
+                            </div>
+                            <p class="text-xs font-bold text-blue-700 text-right" id="kpi-progress-text">0%</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div class="card p-6 shadow-sm">
+                            <h4 class="font-bold text-slate-800 text-sm uppercase tracking-wider mb-4"><i class="fa-solid fa-list-check text-blue-500 mr-2"></i>Status por Eixo</h4>
+                            <div class="space-y-4" id="progress-menus"></div>
+                        </div>
+                        <div class="card p-6 shadow-sm flex flex-col">
+                            <h4 class="font-bold text-slate-800 text-sm uppercase tracking-wider mb-4"><i class="fa-solid fa-building-user text-blue-500 mr-2"></i>Pendências por Secretaria</h4>
+                            <div class="relative w-full flex-grow min-h-[250px]">
+                                <canvas id="chart-secretarias"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO: LISTA DE DADOS E FORMULÁRIOS -->
+            <section id="sec-checklist" class="section-content">
+                <div class="max-w-7xl mx-auto">
+                    <div class="card overflow-hidden shadow-sm">
+                        <div class="bg-slate-100 px-5 py-4 border-b border-slate-200 flex flex-col sm:flex-row justify-between sm:items-center gap-3">
+                            <div>
+                                <h3 id="checklist-title" class="text-sm font-bold text-slate-800 uppercase tracking-wider">Submenu Título</h3>
+                                <p class="text-[11px] text-slate-500 mt-0.5">Insira os dados, justificativas ou bases legais diretamente no sistema.</p>
+                            </div>
+                            <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-1 rounded uppercase self-start sm:self-auto" id="checklist-secretaria">Secretaria</span>
+                        </div>
+                        <div class="overflow-x-auto w-full">
+                            <table class="w-full text-left border-collapse min-w-[600px]">
+                                <thead class="bg-slate-50 border-b border-slate-200 text-[10px] uppercase tracking-wider text-slate-500">
+                                    <tr>
+                                        <th class="p-4 w-16 text-center">Nº</th>
+                                        <th class="p-4">Objeto de Entrega (Requisito TCE)</th>
+                                        <th class="p-4 w-40 text-center">Status</th>
+                                        <th class="p-4 w-48 text-center">Ação / Preenchimento</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-sm divide-y divide-slate-100" id="checklist-tbody">
+                                    <!-- Renderizado via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO: TABELAS DINÂMICAS DE DADOS -->
+            <section id="sec-tabelas" class="section-content">
+                <div class="max-w-7xl mx-auto">
+                    <div class="mb-4 bg-blue-50 border border-blue-200 text-blue-800 p-4 rounded-lg flex gap-3 text-sm items-center justify-between">
+                        <div class="flex gap-3">
+                            <i class="fa-solid fa-table-list mt-0.5 shrink-0 text-lg"></i>
+                            <div>
+                                <strong>Módulo de Dados Estruturados</strong><br>
+                                Preencha as colunas rigorosamente conforme os padrões estabelecidos na Requisição TCE-SP.
+                            </div>
+                        </div>
+                        <button onclick="voltarParaChecklist()" class="bg-white border border-blue-300 text-blue-700 px-3 py-1.5 rounded shadow-sm text-xs font-bold hover:bg-blue-100 transition-colors hidden" id="btn-voltar-tabela"><i class="fa-solid fa-arrow-left mr-1"></i> Voltar</button>
+                    </div>
+                    
+                    <div class="card overflow-hidden shadow-sm" id="container-tabelas-dinamicas">
+                        <!-- Renderizado via JS -->
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script>
+        // ==========================================
+        // 1. BASE DE DADOS MAIOR (ESTRUTURA ATUALIZADA)
+        // ==========================================
+        
+        const bancoDeDados = [
+            // 1. Planejamento e Controle Interno
+            { id: "1.1", eixo: "Planejamento e Controle Interno", submenu: "Peças Contábeis e Notas", desc: "Balanços e peças contábeis completas de 2025", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "1.2", eixo: "Planejamento e Controle Interno", submenu: "Peças Contábeis e Notas", desc: "Notas Explicativas (ou Certidão Negativa de emissão)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "1.3", eixo: "Planejamento e Controle Interno", submenu: "Unidade de Controle Interno", desc: "Atos de regulamentação/designação (e alterações em 2025)", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "1.4", eixo: "Planejamento e Controle Interno", submenu: "Unidade de Controle Interno", desc: "Plano de Ações do Controle Interno", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "1.5", eixo: "Planejamento e Controle Interno", submenu: "Unidade de Controle Interno", desc: "Relatórios de 2025 com ciência do Prefeito", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "1.6", eixo: "Planejamento e Controle Interno", submenu: "Unidade de Controle Interno", desc: "Providências tomadas sobre irregularidades apontadas", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "1.7", eixo: "Planejamento e Controle Interno", submenu: "Planejamento Orçamentário", desc: "Quadro de Créditos Adicionais (Anexo PC-01)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "1.8", eixo: "Planejamento e Controle Interno", submenu: "Planejamento Orçamentário", desc: "Leis e Decretos de alterações orçamentárias", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "1.9", eixo: "Planejamento e Controle Interno", submenu: "Planejamento Orçamentário", desc: "Questionário IEG-M (Documentação de validação)", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 6", eixo: "Planejamento e Controle Interno", submenu: "Obras Paralisadas e Atrasadas (Item 6)", desc: "Módulo tabular e de preenchimento para as obras afetadas em 2025", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "tabela", dados: "" },
+
+            // 2. Gestão Financeira e Contábil
+            { id: "2.1", eixo: "Gestão Financeira e Contábil", submenu: "Tesouraria e Bancos", desc: "Relação de todas as contas (ativas/inativas)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "2.2", eixo: "Gestão Financeira e Contábil", submenu: "Tesouraria e Bancos", desc: "Extratos bancários e conciliações (Dezembro/2025)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "2.3", eixo: "Gestão Financeira e Contábil", submenu: "Tesouraria e Bancos", desc: "Depósitos Judiciais (LC 151/15): Saldo, conta razão, extratos e aplicação", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "2.4", eixo: "Gestão Financeira e Contábil", submenu: "Receita e Dívida Ativa", desc: "Saldos da Dívida Ativa (2024 vs 2025)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "2.5", eixo: "Gestão Financeira e Contábil", submenu: "Receita e Dívida Ativa", desc: "Relatório de atualizações, inscrições e cancelamentos (prescrição)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "2.6", eixo: "Gestão Financeira e Contábil", submenu: "Receita e Dívida Ativa", desc: "Isenções, anistias e remissões (com base legal e cumprimento da LRF)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "2.7", eixo: "Gestão Financeira e Contábil", submenu: "Receita e Dívida Ativa", desc: "ISS sobre Cartórios (Relatório do sistema)", secretaria: "FINANCAS", status: "Concluido", tipo: "texto", dados: "Relatório de cobrança de ISS gerado pelo sistema integrado Tributário em 01/02/2026." },
+            { id: "2.8", eixo: "Gestão Financeira e Contábil", submenu: "Obrigações e Parcelamentos", desc: "Previdenciário (INSS/RPPS): Legislação, contratos, pagamentos em 2025 e saldo", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "2.9", eixo: "Gestão Financeira e Contábil", submenu: "Obrigações e Parcelamentos", desc: "FGTS/PASEP: Guias, comprovantes e parcelamentos", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "2.10", eixo: "Gestão Financeira e Contábil", submenu: "Obrigações e Parcelamentos", desc: "Repasses LDB (Art. 69): Saldo para cobertura de Restos a Pagar", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "2.11", eixo: "Gestão Financeira e Contábil", submenu: "Auditoria de Contas Específicas", desc: "Razão das contas 3.6.3.00.00.00 e 3.6.5.00.00.00 (com documentos de suporte)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "2.12", eixo: "Gestão Financeira e Contábil", submenu: "Auditoria de Contas Específicas", desc: "Análise de variação do Passivo Circulante (Contas 2.1.1.4 e 2.1.8.0)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "2.13", eixo: "Gestão Financeira e Contábil", submenu: "Auditoria de Contas Específicas", desc: "Operações ARO (Antecipação de Receita)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "2.14", eixo: "Gestão Financeira e Contábil", submenu: "Auditoria de Contas Específicas", desc: "Levantamento Geral de Bens (Móveis e Imóveis)", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
+
+            // 3. Precatórios e Gestão Fiscal
+            { id: "3.1", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Precatórios e Requisições", desc: "Pagamentos do Regime Especial 2025 (Empenhos e Comprovantes)", secretaria: "JURIDICO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "3.2", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Precatórios e Requisições", desc: "Requisições de Pequeno Valor (RPV): Relação e ofícios", secretaria: "JURIDICO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "3.3", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Precatórios e Requisições", desc: "Certidões: Regularidade DEPRE e Registro de Entrada de ofícios", secretaria: "JURIDICO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "3.4", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Precatórios e Requisições", desc: "Extratos TJ e TRT (Posição 31/12/2025)", secretaria: "JURIDICO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "3.5", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Transferências e Desapropriações", desc: "Transferências Especiais Federais (Art. 166-A CF)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "3.6", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Transferências e Desapropriações", desc: "Transferências Especiais Estaduais (Art. 175-A CE)", secretaria: "FINANCAS", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "3.7", eixo: "Precatórios e Gestão Fiscal Especial", submenu: "Transferências e Desapropriações", desc: "Relatório de Desapropriações 2025 (Valores e Credores)", secretaria: "JURIDICO", status: "Pendente", tipo: "texto", dados: "" },
+
+            // 4. Gestão de Pessoal (RH)
+            { id: "4.1", eixo: "Gestão de Pessoal (RH)", submenu: "Agentes Políticos e Comissionados", desc: "Declarações de Bens (Prefeito, Vice e Secretários)", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "4.2", eixo: "Gestão de Pessoal (RH)", submenu: "Agentes Políticos e Comissionados", desc: "Cadastro CadTCESP (Prefeito e Vice)", secretaria: "RH", status: "Concluido", tipo: "texto", dados: "Cadastros atualizados no portal do TCESP em 15/01/2026." },
+            { id: "Item 40", eixo: "Gestão de Pessoal (RH)", submenu: "Agentes Políticos e Comissionados", desc: "Relação de Comissionados: Nomeações/Exonerações, Portarias e Atribuições", secretaria: "RH", status: "Pendente", tipo: "tabela", dados: "" },
+            { id: "4.4", eixo: "Gestão de Pessoal (RH)", submenu: "Agentes Políticos e Comissionados", desc: "Certificação de acúmulo de cargos", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "4.5", eixo: "Gestão de Pessoal (RH)", submenu: "Quadro de Servidores e Folha", desc: "Fichas Financeiras 2025 (Arquivo único)", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "4.6", eixo: "Gestão de Pessoal (RH)", submenu: "Quadro de Servidores e Folha", desc: "Relatório de Horas Extras (50% e 100% - Anual)", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "4.7", eixo: "Gestão de Pessoal (RH)", submenu: "Quadro de Servidores e Folha", desc: "Relatório de Férias Vencidas (mais de 2 períodos)", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "4.8", eixo: "Gestão de Pessoal (RH)", submenu: "Quadro de Servidores e Folha", desc: "Gratificações e Benefícios: Portarias e base legal", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "4.9", eixo: "Gestão de Pessoal (RH)", submenu: "Quadro de Servidores e Folha", desc: "Leis de reajuste e revisão salarial 2025", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "Item 42", eixo: "Gestão de Pessoal (RH)", submenu: "Contratações Temporárias e Disciplinar", desc: "Processos Seletivos: Editais, justificativas e listas de classificação", secretaria: "RH", status: "Pendente", tipo: "tabela", dados: "" },
+            { id: "4.11", eixo: "Gestão de Pessoal (RH)", submenu: "Contratações Temporárias e Disciplinar", desc: "Sindicâncias e Processos Administrativos (PADs) em curso", secretaria: "JURIDICO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "4.12", eixo: "Gestão de Pessoal (RH)", submenu: "Contratações Temporárias e Disciplinar", desc: "Relatório de Desvio de Função", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "4.13", eixo: "Gestão de Pessoal (RH)", submenu: "Previdência Complementar", desc: "Contrato e relação de servidores aderentes", secretaria: "RH", status: "Pendente", tipo: "texto", dados: "" },
+
+            // 5. Políticas Públicas
+            { id: "5.1", eixo: "Políticas Públicas", submenu: "Educação (Ensino)", desc: "Fundeb: Abonos/14º salário e aplicação da parcela diferida em 2026", secretaria: "EDUCACAO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "5.2", eixo: "Políticas Públicas", submenu: "Educação (Ensino)", desc: "VAAT/VAAR: Recebimento e atendimento de condicionalidades", secretaria: "EDUCACAO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "5.3", eixo: "Políticas Públicas", submenu: "Educação (Ensino)", desc: "Metas PNE: Vagas em creches e Educação em Tempo Integral", secretaria: "EDUCACAO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "5.4", eixo: "Políticas Públicas", submenu: "Educação (Ensino)", desc: "Infraestrutura Escolar: AVCBs, limpeza de caixas d'água e controle de pragas", secretaria: "EDUCACAO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "5.5", eixo: "Políticas Públicas", submenu: "Educação (Ensino)", desc: "Plano Municipal de Educação: Cronogramas e relatórios de avaliação", secretaria: "EDUCACAO", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "5.6", eixo: "Políticas Públicas", submenu: "Saúde", desc: "Conselho Municipal (CMS): Atas da proposta orçamentária e RAG", secretaria: "SAUDE", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "5.7", eixo: "Políticas Públicas", submenu: "Saúde", desc: "Demandas Judiciais: Relação de procedimentos, quantitativos e operadoras de saúde", secretaria: "SAUDE", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "5.8", eixo: "Políticas Públicas", submenu: "Saúde", desc: "Gestão de Especialidades: Relatórios de demanda reprimida e ações de mitigação", secretaria: "SAUDE", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "5.9", eixo: "Políticas Públicas", submenu: "Saúde", desc: "Ajustes com Terceiro Setor: Santa Casa de Misericórdia e APAE de Olímpia", secretaria: "SAUDE", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "5.10", eixo: "Políticas Públicas", submenu: "Saúde", desc: "Atenção Básica: Equipes ESF e cobertura de população", secretaria: "SAUDE", status: "Pendente", tipo: "texto", dados: "" },
+            { id: "5.11", eixo: "Políticas Públicas", submenu: "Meio Ambiente", desc: "Ações e metas de abastecimento de água potável e esgoto sanitário", secretaria: "CASA_CIVIL", status: "Pendente", tipo: "texto", dados: "" },
+
+            // 6. Auditoria de Conformidade (Anexos Tabela)
+            { id: "Anexo I", eixo: "Auditoria de Conformidade (Anexos)", submenu: "Anexo I - Amostra de Empenhos", desc: "Painel de controle com os 99 empenhos de 2025 selecionados para auditoria in loco", secretaria: "FINANCAS", status: "Especial", tipo: "tabela", dados: "" },
+            { id: "Anexo II", eixo: "Auditoria de Conformidade (Anexos)", submenu: "Anexo II - Divergências de Quadro", desc: "Formulário de justificativas para as divergências entre vagas do quadro e lotações reais", secretaria: "RH", status: "Especial", tipo: "tabela", dados: "" },
+            { id: "Anexo III", eixo: "Auditoria de Conformidade (Anexos)", submenu: "Anexo III - Incompatibilidade de Escolaridade", desc: "Painel para controle e plano de correção dos 101 registros funcionais apontados pelo TCE", secretaria: "RH", status: "Especial", tipo: "tabela", dados: "" }
+        ];
+
+        // DADOS DAS TABELAS (Mock inicial baseados nos JSONs/Estruturas)
+        const dadosTabelas = {
+            "Item 6": [
+                { obra_id: "OBR-001", descricao_obra: "Reforma UBS Central", contratada: "Construtora Alfa", valor_inicial_contrato: "1.200.000,00", valor_aditado: "0,00", valor_total_pago: "500.000,00", data_paralisacao: "15/08/2025", motivo_paralisacao_atraso: "Atraso no repasse estadual", providencias_regularizacao: "Notificação oficial" }
+            ],
+            "Item 40": [
+                { cod: "5447", cargo: "Assessor Executivo", nome: "Carlos Henrique Vasconcelos", dtNom: "05/01/2025", dtExo: "-", lei: "Lei Municipal nº 3.450/2020" }
+            ],
+            "Item 42": [
+                { cod: "260", cargo: "Professor Ed. Básica I", nome: "Ana Paula Ferreira", dtAdm: "01/02/2025", dtDesl: "-", ativo: "SIM", prov: "Processo Seletivo nº 01/2024" }
+            ],
+            "Anexo I": [
+                { emp: "169", data: "07/01/2025", credor: "SUPRASERV SERVICO AVANCADO LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço de limpeza predial", valorPago: "38.472,67" },
+                { emp: "218", data: "10/01/2025", credor: "JOSEPH ROSSI EMPREENDIMENTOS IMOB.", mod: "DISPENSA DE LICITA.", hist: "Locação de imóvel para secretarias", valorPago: "40.939,88" },
+                { emp: "221", data: "13/01/2025", credor: "PLANERGI URBANIZACAO SERVICOS EIRELI", mod: "PREGÃO ELETRÔNICO", hist: "Produção e manutenção de mudas", valorPago: "41.425,56" },
+                { emp: "244", data: "14/01/2025", credor: "JOSEPH ROSSI EMPREENDIMENTOS IMOB.", mod: "DISPENSA DE LICITA.", hist: "Locação imóvel Farmácia Municipal", valorPago: "84.937,60" },
+                { emp: "246", data: "14/01/2025", credor: "CONSTROESTE CONSTRUTORA E PARTICIP.", mod: "PREGÃO ELETRÔNICO", hist: "Coleta, transporte e tratamento lixo", valorPago: "103.975,14" },
+                { emp: "305", data: "14/01/2025", credor: "SILVIO ROBERTO BUCK DE OLIVEIRA ME", mod: "PREGÃO PRESENCIAL", hist: "Manutenção continuada veículos leves", valorPago: "53.744,54" },
+                { emp: "318", data: "15/01/2025", credor: "SILVIO ROBERTO BUCK DE OLIVEIRA ME", mod: "PREGÃO PRESENCIAL", hist: "Fornecimento peças veículos de porte", valorPago: "152.462,81" },
+                { emp: "363", data: "20/01/2025", credor: "CATSARA PETSHOP LTDA ME", mod: "PREGÃO ELETRÔNICO", hist: "Ração para cães e gatas filhotes", valorPago: "54.400,00" },
+                { emp: "449", data: "23/01/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço de portaria patrimonial", valorPago: "60.226,28" },
+                { emp: "499", data: "24/01/2025", credor: "CIRURGICA UNIAO LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Curativo Mepilex - Ação Judicial", valorPago: "132.000,00" },
+                { emp: "594", data: "27/01/2025", credor: "V2 INTEGRADORA DE SOLUCOES E IMP.", mod: "PREGÃO ELETRÔNICO", hist: "Serviço de monitoramento de alarme", valorPago: "20.454,88" },
+                { emp: "804", data: "28/01/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "44.751,48" },
+                { emp: "1420", data: "11/02/2025", credor: "CIRURGICA VITORIA COM. MEDICAMENTOS", mod: "PREGÃO ELETRÔNICO", hist: "Kit Dengue IgG e IgM imunoensaio", valorPago: "37.548,00" },
+                { emp: "1572", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço portaria patrimonial", valorPago: "254.374,10" },
+                { emp: "1575", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço portaria patrimonial", valorPago: "194.717,55" },
+                { emp: "1603", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço recepção e atendimento diurno", valorPago: "108.595,74" },
+                { emp: "1605", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço recepção posto 24h diuturno", valorPago: "400.858,80" },
+                { emp: "1613", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço recepção e atendimento diurno", valorPago: "59.378,11" },
+                { emp: "1620", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço portaria patrimonial", valorPago: "69.352,33" },
+                { emp: "1716", data: "17/02/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço recepção e atendimento diurno", valorPago: "92.514,99" },
+                { emp: "2337", data: "28/02/2025", credor: "ASSIST COMERCIO E SERVICOS LTDA EPP", mod: "PREGÃO ELETRÔNICO", hist: "Posto atendimento call center 8 func.", valorPago: "214.500,00" },
+                { emp: "2346", data: "28/02/2025", credor: "ARHO SERVICOS DE APOIO EMPRESARIAL", mod: "PREGÃO ELETRÔNICO", hist: "Motorista transporte Secret. Saúde", valorPago: "469.508,19" },
+                { emp: "2347", data: "28/02/2025", credor: "ASSIST COMERCIO E SERVICOS LTDA EPP", mod: "PREGÃO ELETRÔNICO", hist: "Licença sistema gerenc. atendimento", valorPago: "110.500,00" },
+                { emp: "2348", data: "28/02/2025", credor: "EXATA CONSULTORIA E ASSESSORIA", mod: "CONVITE", hist: "Consultoria especializada SUS", valorPago: "34.500,00" },
+                { emp: "2362", data: "28/02/2025", credor: "CONSTROESTE CONSTRUTORA E PARTICIP.", mod: "PREGÃO ELETRÔNICO", hist: "Coleta de lixo hospitalar", valorPago: "141.808,64" },
+                { emp: "2423", data: "07/03/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "22.465,95" },
+                { emp: "2592", data: "10/03/2025", credor: "REMOVITTA SERVICOS MEDICOS URGENCIA", mod: "PREGÃO ELETRÔNICO", hist: "Transferência paciente suporte avançado", valorPago: "138.404,00" },
+                { emp: "2888", data: "18/03/2025", credor: "CATSARA PETSHOP LTDA ME", mod: "PREGÃO ELETRÔNICO", hist: "Ração cães e gatos filhotes", valorPago: "59.640,00" },
+                { emp: "2989", data: "18/03/2025", credor: "TRIVALE INSTITUICAO DE PAGAMENTO", mod: "PREGÃO ELETRÔNICO", hist: "Gerenciamento abastecimento frota", valorPago: "66.548,97" },
+                { emp: "2992", data: "19/03/2025", credor: "RENOVE SERVICOS DE LIMPEZA E CONS.", mod: "PREGÃO ELETRÔNICO", hist: "Limpeza predial das Secretarias", valorPago: "21.325,18" },
+                { emp: "2994", data: "19/03/2025", credor: "RENOVE SERVICOS DE LIMPEZA E CONS.", mod: "PREGÃO ELETRÔNICO", hist: "Limpeza predial das Secretarias", valorPago: "31.987,78" },
+                { emp: "3360", data: "26/03/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Auxílio Alimentação", valorPago: "45.000,00" },
+                { emp: "3642", data: "02/04/2025", credor: "PORTAL LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Amoxicilina Clavulanato / Glicazida", valorPago: "44.205,00" },
+                { emp: "3650", data: "02/04/2025", credor: "SOMA SP PRODUTOS HOSPITALARES LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Bicarbonato de Sódio / Dimeticona", valorPago: "89.671,65" },
+                { emp: "3742", data: "04/04/2025", credor: "MC FARMA LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Tiras para determinação glicose", valorPago: "155.000,00" },
+                { emp: "4230", data: "11/04/2025", credor: "PLANERGI URBANIZACAO SERVICOS EIRELI", mod: "PREGÃO ELETRÔNICO", hist: "Produção e manutenção de mudas", valorPago: "115.723,91" },
+                { emp: "4232", data: "11/04/2025", credor: "HOSPITAL PSIQUIATRICO MAHATMA GANDHI", mod: "DISPENSA DE LICITA.", hist: "Internação compulsória dependentes", valorPago: "46.900,00" },
+                { emp: "4271", data: "14/04/2025", credor: "BIODIAGNOSTICA PROD. HOSPITALARES", mod: "INEXIGÍVEL", hist: "Soro controle para equip. Easylyte", valorPago: "60.300,00" },
+                { emp: "4275", data: "14/04/2025", credor: "BIODIAGNOSTICA PROD. HOSPITALARES", mod: "PREGÃO ELETRÔNICO", hist: "Locação analisador hematológico", valorPago: "131.499,96" },
+                { emp: "4425", data: "16/04/2025", credor: "CIRURGICA UNIAO LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Curativo Mepilex - Ação Judicial", valorPago: "44.000,00" },
+                { emp: "4460", data: "17/04/2025", credor: "PLANERGI URBANIZACAO SERVICOS EIRELI", mod: "PREGÃO ELETRÔNICO", hist: "Serviços veterinários fins de semana", valorPago: "86.914,90" },
+                { emp: "4508", data: "23/04/2025", credor: "UNILABORAL LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Empenho correção (vínculo incorreto)", valorPago: "19.200,00" },
+                { emp: "4665", data: "25/04/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Auxílio Alimentação", valorPago: "121.440,00" },
+                { emp: "4671", data: "25/04/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Auxílio Alimentação", valorPago: "101.000,00" },
+                { emp: "4676", data: "25/04/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Auxílio Alimentação", valorPago: "46.900,00" },
+                { emp: "4682", data: "25/04/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Auxílio Alimentação", valorPago: "47.820,00" },
+                { emp: "5301", data: "12/05/2025", credor: "MALUFI NEGOCIOS IMOBILIARIOS ME", mod: "INEXIGÍVEL", hist: "Locação imóvel Secretarias/Projetos", valorPago: "99.643,44" },
+                { emp: "6096", data: "28/05/2025", credor: "ALFALAGOS LTDA", mod: "DISPENSA DE LICITA.", hist: "Bupropiona / Diclofenaco Pomada", valorPago: "26.232,97" },
+                { emp: "6101", data: "29/05/2025", credor: "APOIO ASSESSORIA IMOBILIARIA LTDA", mod: "DISPENSA DE LICITA.", hist: "Aluguel imóvel Via Acesso Álvaro Cassiano", valorPago: "36.849,00" },
+                { emp: "6331", data: "04/06/2025", credor: "WHITE MARTINS GASES INDUSTRIAIS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Oxigênio medicinal carga cilindros", valorPago: "34.389,10" },
+                { emp: "6332", data: "04/06/2025", credor: "WHITE MARTINS GASES INDUSTRIAIS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Oxigênio medicinal carga cilindros", valorPago: "34.541,64" },
+                { emp: "6774", data: "16/06/2025", credor: "ARHO SERVICOS DE APOIO EMPRESARIAL", mod: "PREGÃO ELETRÔNICO", hist: "Motorista transportes Sec. Saúde", valorPago: "604.309,70" },
+                { emp: "7020", data: "25/06/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Auxílio Alimentação", valorPago: "23.400,00" },
+                { emp: "7157", data: "26/06/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "88.993,96" },
+                { emp: "7160", data: "26/06/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "26.405,76" },
+                { emp: "7163", data: "26/06/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "94.665,17" },
+                { emp: "7222", data: "26/06/2025", credor: "ACACIA COMERCIO DE MEDICAMENTOS", mod: "PREGÃO ELETRÔNICO", hist: "Sonda uretral / Luva de procedimento", valorPago: "47.018,00" },
+                { emp: "7226", data: "26/06/2025", credor: "CLEANMAX SERVICOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço de limpeza canil municipal", valorPago: "61.868,29" },
+                { emp: "7328", data: "30/06/2025", credor: "RHELCON COMERCIO E ASSIST. TECNICA", mod: "PREGÃO ELETRÔNICO", hist: "Manutenção aparelho Raio-X", valorPago: "32.250,00" },
+                { emp: "7923", data: "11/07/2025", credor: "REAL PET SHOP E PROD. AGROVET.", mod: "PREGÃO ELETRÔNICO", hist: "Ração cães e gatos filhotes", valorPago: "73.575,00" },
+                { emp: "8251", data: "21/07/2025", credor: "ASSIST COMERCIO E SERVICOS LTDA EPP", mod: "PREGÃO ELETRÔNICO", hist: "Licença sistema atendimento", valorPago: "44.200,00" },
+                { emp: "8267", data: "21/07/2025", credor: "CONSTROESTE CONSTRUTORA E PARTICIP.", mod: "PREGÃO ELETRÔNICO", hist: "Coleta de lixo hospitalar", valorPago: "190.866,12" },
+                { emp: "8268", data: "21/07/2025", credor: "ADAIR DE PAULA SILVA 04947432802", mod: "PREGÃO ELETRÔNICO", hist: "Assist. técnica e instal. ar-condic.", valorPago: "17.923,90" },
+                { emp: "8486", data: "25/07/2025", credor: "RENOVE SERVICOS DE LIMPEZA E CONS.", mod: "PREGÃO ELETRÔNICO", hist: "Limpeza técnica especializada Saúde", valorPago: "244.149,26" },
+                { emp: "8488", data: "25/07/2025", credor: "RENOVE SERVICOS DE LIMPEZA E CONS.", mod: "PREGÃO ELETRÔNICO", hist: "Limpeza posto 24h especializado", valorPago: "370.257,19" },
+                { emp: "8489", data: "25/07/2025", credor: "RENOVE SERVICOS DE LIMPEZA E CONS.", mod: "PREGÃO ELETRÔNICO", hist: "Limpeza predial das Secretarias", valorPago: "59.708,40" },
+                { emp: "8490", data: "25/07/2025", credor: "RENOVE SERVICOS DE LIMPEZA E CONS.", mod: "PREGÃO ELETRÔNICO", hist: "Limpeza técnica especializada Saúde", valorPago: "22.509,15" },
+                { emp: "8728", data: "28/07/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Auxílio Alimentação", valorPago: "63.840,00" },
+                { emp: "8757", data: "28/07/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "26.694,40" },
+                { emp: "8823", data: "29/07/2025", credor: "REMOVITTA SERVICOS MEDICOS URGENCIA", mod: "PREGÃO ELETRÔNICO", hist: "Transferência suporte avançado", valorPago: "57.933,76" },
+                { emp: "9170", data: "06/08/2025", credor: "CONSTROESTE CONSTRUTORA E PARTICIP.", mod: "DISPENSA DE LICITA.", hist: "Indenização serviço coleta lixo", valorPago: "170.607,44" },
+                { emp: "9201", data: "06/08/2025", credor: "MAIA E SILVA APOIO A EDIFICIOS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Serviço portaria patrimonial", valorPago: "101.062,83" },
+                { emp: "9728", data: "22/08/2025", credor: "GENTE SEGURADORA S A", mod: "PREGÃO ELETRÔNICO", hist: "Cobertura securitária da frota", valorPago: "41.979,83" },
+                { emp: "9770", data: "25/08/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Auxílio Alimentação", valorPago: "25.800,00" },
+                { emp: "9896", data: "25/08/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "75.887,87" },
+                { emp: "9956", data: "25/08/2025", credor: "MODELO INFORMATICA LTDA", mod: "CONVITE", hist: "Consultoria e apoio administrativo", valorPago: "20.893,76" },
+                { emp: "10240", data: "01/09/2025", credor: "LDC TECNOLOGIA LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Microcomputador 8GB DDR4", valorPago: "111.060,00" },
+                { emp: "10412", data: "03/09/2025", credor: "SUNAB SERVICOS DIVERSOS LTDA ME", mod: "PREGÃO ELETRÔNICO", hist: "Papel sulfite formato A4 resma", valorPago: "60.000,00" },
+                { emp: "10422", data: "03/09/2025", credor: "F M COMERCIO DE ARTIGOS MEDICOS", mod: "PREGÃO ELETRÔNICO", hist: "Compressa de gaze estéril", valorPago: "25.898,00" },
+                { emp: "10616", data: "08/09/2025", credor: "NOVAMAR AMBIENTAL E CONSTRUTORA", mod: "PREGÃO ELETRÔNICO", hist: "Retirada revestimento pedra/granito", valorPago: "125.219,98" },
+                { emp: "10694", data: "10/09/2025", credor: "WHITE MARTINS GASES INDUSTRIAIS", mod: "DISPENSA DE LICITA.", hist: "Oxigênio medicinal carga cilindros", valorPago: "62.294,90" },
+                { emp: "10695", data: "11/09/2025", credor: "ASSOC LAR SAO FRANCISCO DE ASSIS", mod: "DISPENSA DE LICITA.", hist: "Internação compulsória clínica hosp.", valorPago: "38.400,00" },
+                { emp: "10993", data: "17/09/2025", credor: "CIRURGICA UNIAO LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Curativo Silvercel Hidroalginato", valorPago: "40.095,00" },
+                { emp: "10997", data: "17/09/2025", credor: "DANILO MACHADO LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Ar Condicionado Split Piso Teto", valorPago: "20.760,00" },
+                { emp: "11170", data: "22/09/2025", credor: "AUTO SUTURE DO BRASIL LTDA", mod: "INEXIGÍVEL", hist: "Conjunto infusão Quick Set - Judicial", valorPago: "159.790,00" },
+                { emp: "11490", data: "25/09/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "89.643,03" },
+                { emp: "11736", data: "02/10/2025", credor: "NEXUS COMERCIO E TECNOLOGIA LTDA", mod: "DISPENSA DE LICITA.", hist: "Licença de uso software Saúde Web", valorPago: "81.000,00" },
+                { emp: "11820", data: "06/10/2025", credor: "CM HOSPITALAR S A", mod: "PREGÃO ELETRÔNICO", hist: "Pembrolizumabe 100mg inj FA", valorPago: "95.983,26" },
+                { emp: "12494", data: "24/10/2025", credor: "ACACIA COMERCIO DE MEDICAMENTOS", mod: "PREGÃO ELETRÔNICO", hist: "Sonda uretral / Luva procedimento", valorPago: "25.013,00" },
+                { emp: "12852", data: "30/10/2025", credor: "CIRURGICA UNIAO LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Curativo Mepilex - Ação Judicial", valorPago: "82.200,00" },
+                { emp: "12902", data: "30/10/2025", credor: "LMM EMBALAGNS LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Copo descartável translúcido 180ml", valorPago: "25.165,00" },
+                { emp: "12905", data: "30/10/2025", credor: "COMERCIAL JOAO AFONSO LTDA", mod: "PREGÃO ELETRÔNICO", hist: "Café torrado e moído 500g", valorPago: "61.260,00" },
+                { emp: "12935", data: "30/10/2025", credor: "BRISTOL MYERS SQUIBB FARMACEUTICA", mod: "PREGÃO ELETRÔNICO", hist: "Nivolumabe 40mg / 100mg inj FA", valorPago: "39.776,28" },
+                { emp: "13151", data: "05/11/2025", credor: "BIODIAGNOSTICA PROD. HOSPITALARES", mod: "PREGÃO ELETRÔNICO", hist: "Locação analisador hematológico", valorPago: "43.833,32" },
+                { emp: "13523", data: "24/11/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Auxílio Alimentação", valorPago: "29.900,00" },
+                { emp: "14889", data: "29/12/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "30.409,90" },
+                { emp: "14892", data: "29/12/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "59.898,76" },
+                { emp: "14909", data: "29/12/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Vencimento folha pagamento", valorPago: "47.253,59" },
+                { emp: "14930", data: "29/12/2025", credor: "PREFEITURA MUNICIPAL DE OLIMPIA", mod: "OUTROS/NÃO APLICÁV", hist: "Auxílio Alimentação", valorPago: "25.200,00" }
+            ],
+            "Anexo II": [
+                { cod: "5509", cargo: "ESCRITURARIO II - ANEXO IX", providas: 4, lotacoes: 3, dif: 1 },
+                { cod: "727", cargo: "ADMINISTRADOR PUBLICO I", providas: 14, lotacoes: 15, dif: 1 },
+                { cod: "556", cargo: "PSICOLOGO", providas: 28, lotacoes: 27, dif: 1 },
+                { cod: "5409", cargo: "ASSESSOR DE GABINETE I", providas: 56, lotacoes: 57, dif: 1 }
+            ],
+            "Anexo III": [
+                { cpf: "038.828.718-73", nome: "ADAO STOCHI", escAtual: "Ensino Básico inc.", cargo: "VIGIA", escExigida: "Ensino Básico", prov: "Concurso público" },
+                { cpf: "169.732.738-90", nome: "ADRIANA AP. RECCO FLORENCIO", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "159.232.768-01", nome: "ADRIANA MARIA B LORENSETTI", escAtual: "Ensino Médio", cargo: "TECNICO EM ENFERMAGEM", escExigida: "Ensino Técnico", prov: "Concurso público" },
+                { cpf: "104.323.048-35", nome: "ALBERTO CARLOS J. DA COSTA", escAtual: "Ensino Médio", cargo: "TECNICO DE ELETRICIDADE II", escExigida: "Ensino Técnico", prov: "Concurso público" },
+                { cpf: "223.628.038-64", nome: "ALEXANDRA DA SILVA MATOS", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "233.171.718-47", nome: "AMANDA PEREIRA DA SILVA", escAtual: "Ensino Médio", cargo: "TECNICO EM LABORATORIO", escExigida: "Ensino Técnico", prov: "Concurso público" },
+                { cpf: "325.022.108-28", nome: "ANA CLAUDIA RODRIGUES", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "214.024.298-00", nome: "ANA DE FATIMA MARQUES", escAtual: "Ensino Médio", cargo: "TECNICO EM ENFERMAGEM", escExigida: "Ensino Técnico", prov: "Concurso público" },
+                { cpf: "070.625.398-13", nome: "ANA MARIA SOARES REGINALDO", escAtual: "Ensino Médio", cargo: "TECNICO EM ENFERMAGEM", escExigida: "Ensino Técnico", prov: "Concurso público" },
+                { cpf: "159.377.798-19", nome: "ANA PAULA DA SILVA BELINTANI", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "231.251.328-51", nome: "ANA PAULA DA SILVA FERREIRA", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "331.951.638-88", nome: "ANA PAULA M. C. RODRIGUES", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "222.299.298-28", nome: "ANA VILMA MATTOS DIAS", escAtual: "Ensino Médio", cargo: "TECNICO EM ENFERMAGEM", escExigida: "Ensino Técnico", prov: "Concurso público" },
+                { cpf: "412.095.928-96", nome: "ANDRE LUIZ GONCALVES", escAtual: "Ensino Médio", cargo: "PSICOLOGO", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "052.208.438-89", nome: "ANTONIO LUIZ BARRIENTO", escAtual: "Ensino Básico inc.", cargo: "MOTORISTA", escExigida: "Ensino Básico", prov: "Concurso público" },
+                { cpf: "159.377.528-80", nome: "BENEDITA DE FATIMA FAUSTINO", escAtual: "Ensino Básico", cargo: "TELEFONISTA", escExigida: "Ensino Médio", prov: "Concurso público" },
+                { cpf: "363.871.408-03", nome: "BRUNA MARTINS AMIANTI", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "418.309.958-71", nome: "CAMILA APARECIDA MIALICHI", escAtual: "Ensino Médio", cargo: "NUTRICIONISTA", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "216.888.678-48", nome: "CARINA BERNARDO VILELA", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "025.827.718-13", nome: "CARLOS H. V. DOS SANTOS", escAtual: "Ensino Médio", cargo: "ASSESSOR EXECUTIVO", escExigida: "Ensino Superior", prov: "Livre Provimento" },
+                { cpf: "099.788.038-40", nome: "CARMEN JIMENES MESSA", escAtual: "Ensino Básico", cargo: "Inspetor de Alunos", escExigida: "Ensino Médio", prov: "Concurso público" },
+                { cpf: "034.799.018-59", nome: "CASSIA CRISTINA RECCO", escAtual: "Ensino Médio", cargo: "ASSESSOR EXECUTIVO", escExigida: "Ensino Superior", prov: "Livre Provimento" },
+                { cpf: "118.255.358-33", nome: "CLAUDIO FOSSALUSSA", escAtual: "Ensino Básico inc.", cargo: "ESCRITURARIO II", escExigida: "Ensino Médio", prov: "Concurso público" },
+                { cpf: "218.134.518-00", nome: "CRISTIANE A. DE C. ALVES", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "341.675.548-01", nome: "DAIANA AP. INACIO GISOLDI", escAtual: "Ensino Técnico", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "354.009.798-82", nome: "DAIANA P. R. PASSARELLA", escAtual: "Ensino Médio", cargo: "PEB II - EDUCACAO ESPECIAL", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "285.907.768-59", nome: "DEBORA LIZ MOREIRA GOTARDO", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "102.792.198-14", nome: "EDIVALDO APARECIDO BONILHA", escAtual: "Ensino Básico inc.", cargo: "MOTORISTA", escExigida: "Ensino Básico", prov: "Concurso público" },
+                { cpf: "331.413.578-85", nome: "EDMUNDO JESUS FERREIRA", escAtual: "Ensino Médio", cargo: "FISCAL DE OBRAS", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "186.322.238-36", nome: "EDSON LOPES DA SILVA", escAtual: "Ensino Básico", cargo: "Escriturario III", escExigida: "Ensino Médio", prov: "Concurso público" },
+                { cpf: "286.106.028-00", nome: "ELIANE AP. LIMA MONTANHEIRO", escAtual: "Ensino Médio", cargo: "Enfermeiro", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "223.990.868-80", nome: "ERICA C. DA SILVA DE ALMEIDA", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "362.295.538-48", nome: "ERICA FERNANDA CARMO", escAtual: "Ensino Médio", cargo: "ASSISTENTE SOCIAL", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "353.424.138-00", nome: "ERICA REGINA TOLEDO", escAtual: "Ensino Médio", cargo: "AUXILIAR DE SAUDE BUCAL", escExigida: "Ensino Técnico", prov: "Concurso público" },
+                { cpf: "290.237.308-28", nome: "FABIANA RODRIGUES CARDOZO", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "109.421.708-57", nome: "FABIANA VERIS", escAtual: "Ensino Médio", cargo: "PEB II - EDUCACAO ESPECIAL", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "302.819.138-54", nome: "FABRICIA FERNANDA SILVESTRE", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "260.772.468-67", nome: "FLAVIA SCALCO FERNANDES", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "109.424.948-30", nome: "FLAVIO BERTHOLDO", escAtual: "Ensino Básico", cargo: "SUPERVISOR DE SERVIÇOS", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "196.410.758-02", nome: "FLAVIO VEDOVATO ARANTES", escAtual: "Ensino Médio", cargo: "ASSESSOR EXECUTIVO", escExigida: "Ensino Superior", prov: "Livre Provimento" },
+                { cpf: "381.592.398-07", nome: "FRANCIELE CRISTINA OLIVEIRA", escAtual: "Ensino Básico", cargo: "TECNICO EM ENFERMAGEM", escExigida: "Ensino Técnico", prov: "Concurso público" },
+                { cpf: "326.116.238-48", nome: "FRANCINE ALESSANDRA P MORAES", escAtual: "Ensino Médio", cargo: "AUXILIAR DE SAUDE BUCAL", escExigida: "Ensino Técnico", prov: "Concurso público" },
+                { cpf: "321.240.878-27", nome: "FRANCISCA G. S. SANTOS", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "086.395.598-30", nome: "GILBERTO AP. RIBEIRO", escAtual: "Ensino Médio", cargo: "FISCAL DE OBRAS", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "330.454.687-00", nome: "GRAZIANA MARCELO GOMES", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "447.210.878-02", nome: "GUILHERME AMIN DE FARIA", escAtual: "Ensino Médio", cargo: "ASSESSOR EXECUTIVO", escExigida: "Ensino Superior", prov: "Livre Provimento" },
+                { cpf: "245.853.978-50", nome: "GUSTAVO MATIAS PERRONI", escAtual: "Ensino Médio", cargo: "ASSESSOR EXECUTIVO", escExigida: "Ensino Superior", prov: "Livre Provimento" },
+                { cpf: "391.408.408-16", nome: "IVAN PASCHOALETTO KOJIMA", escAtual: "Ensino Médio", cargo: "ADMINISTRADOR PUBLICO I", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "217.264.218-56", nome: "JAQUELINE M PEREIRA DA SILVA", escAtual: "Ensino Médio", cargo: "FISCAL AMBIENTAL", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "055.581.808-03", nome: "JOAO BATISTA FERREIRA JUNIOR", escAtual: "Ensino Básico", cargo: "BOMBEIRO MUNICIPAL", escExigida: "Ensino Médio", prov: "Concurso público" },
+                { cpf: "284.737.908-80", nome: "JOAO LUIZ ALVES FERREIRA", escAtual: "Ensino Médio", cargo: "ASSESSOR EXECUTIVO", escExigida: "Ensino Superior", prov: "Livre Provimento" },
+                { cpf: "091.266.448-78", nome: "JOAO LUIZ SANDRIN", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "230.322.298-20", nome: "JOAO PAULO MORELLI", escAtual: "Ensino Médio", cargo: "SEC MUN ZELADORIA/M. AMBIENTE", escExigida: "Ensino Superior", prov: "Livre Provimento" },
+                { cpf: "413.896.638-25", nome: "JOAO VICTOR BUZZO NARCIZO", escAtual: "Ensino Médio", cargo: "FISCAL DE OBRAS", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "098.381.118-05", nome: "JOSE LUIS VISU", escAtual: "Ensino Básico", cargo: "MECANICO", escExigida: "Ensino Técnico", prov: "Concurso público" },
+                { cpf: "018.909.898-86", nome: "JOSE RODRIGUES MEDEIRO FILHO", escAtual: "Ensino Médio", cargo: "TECNICO DE ELETRICIDADE I", escExigida: "Ensino Técnico", prov: "Concurso público" },
+                { cpf: "049.582.638-37", nome: "JOSIANE DOS SANTOS", escAtual: "Ensino Técnico", cargo: "ASSISTENTE SOCIAL", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "345.868.548-04", nome: "JULIANA DE O. F. GONSAGA", escAtual: "Ensino Médio", cargo: "AUXILIAR DE SAUDE BUCAL", escExigida: "Ensino Técnico", prov: "Concurso público" },
+                { cpf: "418.601.258-08", nome: "LEANDRO PIERIN GALLINA", escAtual: "Ensino Médio", cargo: "SEC MUN OBRAS/ENGENHARIA", escExigida: "Ensino Superior", prov: "Livre Provimento" },
+                { cpf: "338.050.878-02", nome: "LIGIA VITAL RISSATTI LAZARIN", escAtual: "Ensino Técnico", cargo: "ENFERMEIRO - 40 HORAS", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "121.725.818-36", nome: "LUCIMAR GOMES LOPES", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "215.027.718-29", nome: "LUCINEIA MICHELETTI RAIMUNDO", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "424.382.188-78", nome: "LUIS HENRIQUE PUGINA", escAtual: "Ensino Médio", cargo: "PEB II - EDUCACAO FISICA", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "128.312.658-35", nome: "LUIZ ANTONIO PEREIRA", escAtual: "Ensino Básico inc.", cargo: "OPERADOR DE MAQUINAS", escExigida: "Ensino Básico", prov: "Concurso público" },
+                { cpf: "438.435.158-59", nome: "LUZIA FERREIRA DE SOUZA SILVA", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "057.198.098-80", nome: "MARCIA BERNADETE N GREMASCO", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "202.693.198-40", nome: "MARCIA MONTANHINI MAGAO", escAtual: "Ensino Médio", cargo: "ASSISTENTE SOCIAL", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "101.157.428-40", nome: "MARCIO HENRIQUE T. SILVA", escAtual: "Ensino Médio", cargo: "COMANDANTE", escExigida: "Ensino Superior", prov: "Livre Provimento" },
+                { cpf: "378.840.478-70", nome: "MARI SANDRA RAMOS DE OLIVEIRA", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "159.376.148-10", nome: "MARIA AP. ALVES DE OLIVEIRA", escAtual: "Ensino Médio", cargo: "TECNICO EM ENFERMAGEM", escExigida: "Ensino Técnico", prov: "Concurso público" },
+                { cpf: "446.432.058-90", nome: "MARIA CLARA RUBIO RECCO", escAtual: "Ensino Médio", cargo: "ENGENHEIRO CIVIL", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "463.152.038-84", nome: "MARIA EDUARDA BARBOSA", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "336.657.338-47", nome: "MARIA GABRIELA DE M. ANDREO", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "417.439.428-85", nome: "MARIANE GUOLLO GONCALVES", escAtual: "Ensino Médio", cargo: "ASSISTENTE SOCIAL", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "328.441.308-10", nome: "MICHELLI FERNANDES TRINDADE", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "202.692.748-04", nome: "NATALINA DOS SANTOS", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "474.770.978-94", nome: "NATHALIA PEDRO MORETTI", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "330.033.488-84", nome: "NELSON FERNANDES PEREIRA NETO", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "373.527.978-31", nome: "OSMAR DOS SANTOS FERNANDES", escAtual: "Ensino Médio", cargo: "TECNICO EM ENFERMAGEM", escExigida: "Ensino Técnico", prov: "Concurso público" },
+                { cpf: "432.149.118-56", nome: "PAULA FRANCINE S. NASCIMENTO", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "420.441.178-94", nome: "PAULO SERGIO ALVES JUNIOR", escAtual: "Ensino Médio", cargo: "FISCAL DE POSTURAS", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "449.903.688-78", nome: "PEDRO AUGUSTO F. MELO", escAtual: "Ensino Médio", cargo: "PEB II - EDUCACAO FISICA", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "279.949.338-66", nome: "RAFAELA APARECIDA RIBEIRO", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "294.529.068-55", nome: "RAQUEL CRISTIANE NAVARINI", escAtual: "Ensino Técnico", cargo: "ASSESSOR EXECUTIVO", escExigida: "Ensino Superior", prov: "Livre Provimento" },
+                { cpf: "294.529.068-55", nome: "RAQUEL CRISTIANE NAVARINI", escAtual: "Ensino Técnico", cargo: "COORDENADOR", escExigida: "Ensino Superior", prov: "Livre Provimento" },
+                { cpf: "295.254.998-20", nome: "ROBERTA MARIA TIENE", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "401.077.928-42", nome: "RODRIGO CARDOSO DE SOUZA", escAtual: "Ensino Básico inc.", cargo: "Inspetor de Alunos", escExigida: "Ensino Médio", prov: "Concurso público" },
+                { cpf: "281.612.058-92", nome: "ROGERIO JOSE PEREIRA", escAtual: "Ensino Básico inc.", cargo: "EDUCADOR SANITARIO", escExigida: "Ensino Básico", prov: "Concurso público" },
+                { cpf: "221.425.948-16", nome: "ROSILEIA P. DE P. SOUZA VILLELA", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "213.773.278-50", nome: "ROSILENE MARIA MARTINS", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "104.653.198-07", nome: "ROSIMEIRE DOS SANTOS CARVALHO", escAtual: "Ensino Médio", cargo: "TECNICO EM ENFERMAGEM", escExigida: "Ensino Técnico", prov: "Concurso público" },
+                { cpf: "041.183.076-77", nome: "SERGIO ADRIANO ALVES", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "159.379.238-71", nome: "SILMARA AP. CORREIA SIQUEIRA", escAtual: "Ensino Básico", cargo: "Inspetor de Alunos", escExigida: "Ensino Médio", prov: "Concurso público" },
+                { cpf: "186.322.158-17", nome: "SUELI CRISTINA BONILHA", escAtual: "Ensino Básico inc.", cargo: "AUXILIAR SERVICOS OPER. I", escExigida: "Ensino Básico", prov: "Concurso público" },
+                { cpf: "352.244.898-73", nome: "TARLIN MAIRA CITOLINO", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "436.417.218-90", nome: "THAINA APARECIDA AGUIAR", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "437.864.758-30", nome: "THAINA ROBERTA O. BARBOSA", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "248.128.478-00", nome: "VALERIA ELIANE DOS SANTOS", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "351.371.108-50", nome: "VALERIA ROSA DE OLIVEIRA", escAtual: "Ensino Médio", cargo: "PROFESSOR EDUC. BÁSICA I", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "224.762.838-94", nome: "VANESSA L. DE A. MARTINS", escAtual: "Ensino Médio", cargo: "Monitor de Creche", escExigida: "Ensino Superior", prov: "Concurso público" },
+                { cpf: "413.043.628-76", nome: "VICTOR ARTUR LOPES TORRES", escAtual: "Ensino Médio", cargo: "ADMINISTRADOR PUBLICO I", escExigida: "Ensino Superior", prov: "Concurso público" }
+            ]
+        };
+
+        const iconesEixo = {
+            "Planejamento e Controle Interno": "fa-sitemap",
+            "Gestão Financeira e Contábil": "fa-file-invoice-dollar",
+            "Precatórios e Gestão Fiscal Especial": "fa-scale-balanced",
+            "Gestão de Pessoal (RH)": "fa-users-gear",
+            "Políticas Públicas": "fa-hand-holding-heart",
+            "Auditoria de Conformidade (Anexos)": "fa-file-signature"
+        };
+
+        // ==========================================
+        // 2. CONSTRUÇÃO DO MENU
+        // ==========================================
+        let currentSubmenu = null;
+
+        function renderMenu() {
+            const container = document.getElementById('menu-container');
+            const visaoGeralBtn = container.firstElementChild;
+            container.innerHTML = '';
+            container.appendChild(visaoGeralBtn);
+
+            const eixos = [...new Set(bancoDeDados.map(item => item.eixo))];
+
+            eixos.forEach((eixo, index) => {
+                const submenus = [...new Set(bancoDeDados.filter(i => i.eixo === eixo).map(i => i.submenu))];
+                const icone = iconesEixo[eixo] || "fa-folder";
+                const mId = `menu-${index}`;
+
+                let htmlSubmenus = '';
+                submenus.forEach((sub, subIdx) => {
+                    htmlSubmenus += `<a class="submenu-link break-words" id="link-${index}-${subIdx}" onclick="abrirSubmenu('${eixo}', '${sub}', this)"><span class="block">${sub}</span></a>`;
+                });
+
+                const divMenu = document.createElement('div');
+                divMenu.className = 'mb-1';
+                
+                divMenu.innerHTML = `
+                    <button onclick="toggleAccordion('${mId}')" class="nav-link w-full flex items-center p-3 text-slate-300 text-left gap-3 group">
+                        <i class="fa-solid ${icone} text-lg w-6 text-center shrink-0 opacity-70 group-hover:opacity-100 transition-opacity"></i>
+                        <span class="text-[10px] font-bold tracking-wider uppercase leading-snug flex-1 break-words pr-2">${index + 1}. ${eixo}</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] transition-transform duration-200 shrink-0 opacity-50 group-hover:opacity-100" id="icon-${mId}"></i>
+                    </button>
+                    <div id="${mId}-wrapper" class="submenu-wrapper ml-6">
+                        <div class="submenu-inner border-l border-slate-700 pl-1 mt-1 rounded-bl flex flex-col">
+                            ${htmlSubmenus}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(divMenu);
+            });
+        }
+
+        function toggleAccordion(id) {
+            const wrapper = document.getElementById(`${id}-wrapper`);
+            const icon = document.getElementById(`icon-${id}`);
+            
+            if (wrapper.classList.contains('open')) {
+                wrapper.classList.remove('open');
+                icon.style.transform = "rotate(0deg)";
+            } else {
+                document.querySelectorAll('.submenu-wrapper').forEach(s => s.classList.remove('open'));
+                document.querySelectorAll('[id^="icon-menu-"]').forEach(i => i.style.transform = "rotate(0deg)");
+                
+                wrapper.classList.add('open');
+                icon.style.transform = "rotate(180deg)";
+            }
+        }
+
+        // ==========================================
+        // 3. NAVEGAÇÃO E LÓGICA DE EXIBIÇÃO
+        // ==========================================
+        function resetActiveLinks() {
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            document.querySelectorAll('.submenu-link').forEach(l => l.classList.remove('active'));
+            document.querySelectorAll('.section-content').forEach(s => s.classList.remove('active'));
+        }
+
+        function showDashboard() {
+            resetActiveLinks();
+            document.getElementById('btn-visao-geral').classList.add('active');
+            document.getElementById('sec-visao-geral').classList.add('active');
+            document.getElementById('page-title').innerText = "Painel Geral de Auditoria";
+            renderDashboards();
+            fecharSidebarMobile();
+            currentSubmenu = null;
+        }
+
+        function abrirSubmenu(eixo, submenu, el) {
+            resetActiveLinks();
+            el.classList.add('active');
+            
+            const paiButton = el.closest('.submenu-wrapper').previousElementSibling;
+            if(paiButton) paiButton.classList.add('active');
+            
+            document.getElementById('page-title').innerText = eixo;
+            currentSubmenu = submenu;
+
+            if(eixo.includes("Anexos") || submenu.includes("Item 6")) {
+                document.getElementById('sec-tabelas').classList.add('active');
+                document.getElementById('btn-voltar-tabela').classList.add('hidden');
+                renderTabelaEspecial(submenu);
+            } else {
+                document.getElementById('sec-checklist').classList.add('active');
+                document.getElementById('checklist-title').innerText = submenu;
+                renderChecklist(submenu);
+            }
+            fecharSidebarMobile();
+        }
+
+        // ==========================================
+        // 4. CHECKLIST COM FORMULÁRIOS DIRETOS
+        // ==========================================
+        function renderChecklist(submenuSelecionado) {
+            const filtroSec = document.getElementById('filtro-secretaria').value;
+            const tbody = document.getElementById('checklist-tbody');
+            tbody.innerHTML = '';
+
+            let itens = bancoDeDados.filter(i => i.submenu === submenuSelecionado);
+            if(filtroSec !== 'TODAS') {
+                itens = itens.filter(i => i.secretaria === filtroSec);
+            }
+
+            if(itens.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="p-8 text-center text-slate-500">Nenhum item correspondente para a Secretaria selecionada.</td></tr>`;
+                document.getElementById('checklist-secretaria').innerText = "-";
+                return;
+            }
+
+            document.getElementById('checklist-secretaria').innerText = itens[0].secretaria;
+
+            itens.forEach(item => {
+                let badgeStatus = '';
+                let botaoAcao = '';
+
+                if (item.status === 'Pendente') {
+                    badgeStatus = `<span class="px-2 py-1 rounded text-[10px] font-bold uppercase status-pendente"><i class="fa-solid fa-circle-exclamation mr-1"></i> Pendente</span>`;
+                } else {
+                    badgeStatus = `<span class="px-2 py-1 rounded text-[10px] font-bold uppercase status-concluido"><i class="fa-solid fa-check-double mr-1"></i> Concluído</span>`;
+                }
+
+                if (item.tipo === 'tabela') {
+                    botaoAcao = `<button onclick="abrirTabelaItem('${item.id}')" class="bg-blue-600 hover:bg-blue-700 text-white text-[10px] font-bold uppercase px-3 py-1.5 rounded w-full transition-colors shadow-sm"><i class="fa-solid fa-table-cells mr-1"></i> Visualizar Tabela</button>`;
+                } else {
+                    const btnClass = item.dados ? 'bg-slate-200 text-slate-700 hover:bg-slate-300' : 'bg-slate-100 text-slate-400';
+                    const btnLabel = item.dados ? 'Visualizar Dados' : 'Sem Dados';
+                    botaoAcao = `<button onclick="visualizarDadosTexto('${item.id}')" class="${btnClass} text-[10px] font-bold uppercase px-3 py-1.5 rounded w-full transition-colors shadow-sm"><i class="fa-solid fa-file-lines mr-1"></i> ${btnLabel}</button>`;
+                }
+
+                tbody.innerHTML += `
+                    <tr class="hover:bg-slate-50/80 transition-colors">
+                        <td class="p-4 text-center font-bold text-slate-400 text-xs">${item.id}</td>
+                        <td class="p-4 text-slate-700 font-medium text-xs sm:text-sm">
+                            ${item.desc}
+                            ${item.dados && item.tipo !== 'tabela' ? `<p class="text-[10px] text-emerald-600 mt-1 truncate max-w-xs"><i class="fa-solid fa-check"></i> Dados inseridos</p>` : ''}
+                        </td>
+                        <td class="p-4 text-center align-middle">${badgeStatus}</td>
+                        <td class="p-4 text-center align-middle">${botaoAcao}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        // ==========================================
+        // 5. INSERÇÃO DIRETA DE TEXTO E JUSTIFICATIVAS
+        // ==========================================
+        function visualizarDadosTexto(itemId) {
+            const item = bancoDeDados.find(i => i.id === itemId);
+            
+            Swal.fire({
+                title: `<span class="text-lg uppercase tracking-wider text-slate-800">${item.id}</span>`,
+                html: `<p class="text-sm font-bold text-slate-600 mb-4">${item.desc}</p>
+                       <div class="text-sm font-mono bg-slate-50 p-4 border border-slate-200 rounded text-left whitespace-pre-wrap">${item.dados || 'Nenhuma informação registada no sistema para este requisito.'}</div>`,
+                showCancelButton: false,
+                confirmButtonText: 'Fechar Detalhes',
+                confirmButtonColor: '#0f172a',
+                width: '600px'
+            });
+        }
+
+        // ==========================================
+        // 6. RENDERIZAÇÃO DE TABELAS DINÂMICAS
+        // ==========================================
+        function abrirTabelaItem(itemId) {
+            document.querySelectorAll('.section-content').forEach(s => s.classList.remove('active'));
+            document.getElementById('sec-tabelas').classList.add('active');
+            document.getElementById('btn-voltar-tabela').classList.remove('hidden'); 
+            renderTabelaEspecial(itemId);
+        }
+
+        function voltarParaChecklist() {
+            document.querySelectorAll('.section-content').forEach(s => s.classList.remove('active'));
+            document.getElementById('sec-checklist').classList.add('active');
+            if (currentSubmenu) renderChecklist(currentSubmenu);
+        }
+
+        function renderTabelaEspecial(chave) {
+            const container = document.getElementById('container-tabelas-dinamicas');
+            let htmlInner = '';
+            
+            if(chave.includes("Item 6")) {
+                const dados = dadosTabelas["Item 6"];
+                let linhas = dados.map(i => `
+                    <tr class="bg-white border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                        <td class="p-3 border-r text-[11px] font-bold text-slate-700 min-w-[150px]">${i.descricao_obra}</td>
+                        <td class="p-3 border-r text-[11px]">${i.contratada}</td>
+                        <td class="p-3 border-r text-[11px] text-right">${i.valor_inicial_contrato}</td>
+                        <td class="p-3 border-r text-[11px] text-right">${i.valor_aditado}</td>
+                        <td class="p-3 border-r text-[11px] text-right font-bold text-blue-700">${i.valor_total_pago}</td>
+                        <td class="p-3 border-r text-[11px] text-center text-rose-600">${i.data_paralisacao}</td>
+                        <td class="p-3 border-r text-[10px]">${i.motivo_paralisacao_atraso}</td>
+                        <td class="p-3 text-[10px]">${i.providencias_regularizacao}</td>
+                    </tr>
+                `).join('');
+
+                htmlInner = `
+                    <div class="bg-slate-100 px-5 py-4 border-b flex justify-between items-center">
+                        <h3 class="text-sm font-bold text-slate-800 uppercase">Item 6 - Obras Paralisadas e Atrasadas</h3>
+                    </div>
+                    <div class="overflow-x-auto p-4 bg-white">
+                        <table class="w-full text-left border-collapse border min-w-[1100px]">
+                            <thead class="bg-slate-800 text-white text-[10px] uppercase">
+                                <tr>
+                                    <th class="p-3 border">Descrição da Obra</th>
+                                    <th class="p-3 border">Contratada</th>
+                                    <th class="p-3 border text-center">Vl. Inicial (R$)</th>
+                                    <th class="p-3 border text-center">Vl. Aditado (R$)</th>
+                                    <th class="p-3 border text-center">Vl. Pago (R$)</th>
+                                    <th class="p-3 border text-center">Dt. Paralisação</th>
+                                    <th class="p-3 border w-48">Motivo Paralisação/Atraso</th>
+                                    <th class="p-3 border w-48">Providências Regularização</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${linhas}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            } 
+            else if(chave.includes("Item 40")) {
+                const dados = dadosTabelas["Item 40"];
+                let linhas = dados.map(i => `
+                    <tr class="bg-white border-b border-slate-100 hover:bg-slate-50">
+                        <td class="p-3 border-r text-xs text-center font-mono">${i.cod}</td>
+                        <td class="p-3 border-r text-xs font-bold text-slate-700">${i.cargo}</td>
+                        <td class="p-3 border-r text-xs uppercase">${i.nome}</td>
+                        <td class="p-3 border-r text-xs text-center text-green-700">${i.dtNom}</td>
+                        <td class="p-3 border-r text-xs text-center text-rose-600">${i.dtExo}</td>
+                        <td class="p-3 text-xs">${i.lei}</td>
+                    </tr>
+                `).join('');
+
+                htmlInner = `
+                    <div class="bg-slate-100 px-5 py-4 border-b flex justify-between items-center">
+                        <h3 class="text-sm font-bold text-slate-800 uppercase">Item 40 - Relação de Comissionados 2025</h3>
+                    </div>
+                    <div class="overflow-x-auto p-4 bg-white">
+                        <table class="w-full text-left border-collapse border min-w-[900px]">
+                            <thead class="bg-slate-800 text-white text-[10px] uppercase">
+                                <tr>
+                                    <th class="p-3 border text-center w-20">Cód. Cargo</th>
+                                    <th class="p-3 border w-48">Cargo em Comissão</th>
+                                    <th class="p-3 border w-64">Nome Completo</th>
+                                    <th class="p-3 border text-center w-24">Dt. Nomeação</th>
+                                    <th class="p-3 border text-center w-24">Dt. Exoneração</th>
+                                    <th class="p-3 border">Legislação com Atribuições</th>
+                                </tr>
+                            </thead>
+                            <tbody>${linhas}</tbody>
+                        </table>
+                    </div>
+                `;
+            }
+            else if(chave.includes("Item 42")) {
+                const dados = dadosTabelas["Item 42"];
+                let linhas = dados.map(i => `
+                    <tr class="bg-white border-b border-slate-100 hover:bg-slate-50">
+                        <td class="p-3 border-r text-xs text-center font-mono">${i.cod}</td>
+                        <td class="p-3 border-r text-xs font-bold text-slate-700">${i.cargo}</td>
+                        <td class="p-3 border-r text-xs uppercase">${i.nome}</td>
+                        <td class="p-3 border-r text-xs text-center text-green-700">${i.dtAdm}</td>
+                        <td class="p-3 border-r text-xs text-center text-rose-600">${i.dtDesl}</td>
+                        <td class="p-3 border-r text-xs text-center font-bold">${i.ativo}</td>
+                        <td class="p-3 text-xs">${i.prov}</td>
+                    </tr>
+                `).join('');
+
+                htmlInner = `
+                    <div class="bg-slate-100 px-5 py-4 border-b flex justify-between items-center">
+                        <h3 class="text-sm font-bold text-slate-800 uppercase">Item 42 - Contratações Temporárias</h3>
+                    </div>
+                    <div class="overflow-x-auto p-4 bg-white">
+                        <table class="w-full text-left border-collapse border min-w-[900px]">
+                            <thead class="bg-slate-800 text-white text-[10px] uppercase">
+                                <tr>
+                                    <th class="p-3 border text-center w-16">Cód.</th>
+                                    <th class="p-3 border w-48">Cargo/Função Temporária</th>
+                                    <th class="p-3 border w-56">Nome Completo</th>
+                                    <th class="p-3 border text-center w-24">Dt. Admissão</th>
+                                    <th class="p-3 border text-center w-24">Dt. Desligamento</th>
+                                    <th class="p-3 border text-center w-20">Ativo 31/12?</th>
+                                    <th class="p-3 border">Provimento (Seletivo nº)</th>
+                                </tr>
+                            </thead>
+                            <tbody>${linhas}</tbody>
+                        </table>
+                    </div>
+                `;
+            }
+            else if(chave === "Anexo III" || chave.includes("Escolaridade") || chave.includes("Anexo III -")) {
+                let linhas = dadosTabelas["Anexo III"].map(i => `
+                    <tr class="bg-white border-b border-slate-100 hover:bg-slate-50">
+                        <td class="p-3 border-r text-center font-mono whitespace-nowrap">${i.cpf}</td>
+                        <td class="p-3 border-r truncate max-w-[200px]"><strong>${i.nome}</strong><br><span class="text-[10px] text-slate-500">${i.cargo}</span></td>
+                        <td class="p-3 border-r text-center text-rose-600 font-bold">${i.escAtual}</td>
+                        <td class="p-3 border-r text-center font-bold text-slate-700">${i.escExigida}</td>
+                        <td class="p-3 text-[11px] text-slate-400 text-center">-</td>
+                    </tr>
+                `).join('');
+
+                htmlInner = `
+                    <div class="bg-slate-100 px-5 py-4 border-b flex justify-between items-center gap-2">
+                        <h3 class="text-sm font-bold text-slate-800 uppercase">Anexo III - Incompatibilidade de Escolaridade (101 Registros)</h3>
+                    </div>
+                    <div class="overflow-x-auto p-4 bg-white">
+                        <table class="w-full text-left border-collapse border min-w-[900px] text-xs">
+                            <thead class="bg-slate-800 text-white text-[10px] uppercase">
+                                <tr>
+                                    <th class="p-3 border w-28 text-center">CPF</th>
+                                    <th class="p-3 border w-48">Servidor / Cargo</th>
+                                    <th class="p-3 border w-32 text-center text-rose-500">Escolaridade Servidor</th>
+                                    <th class="p-3 border w-32 text-center">Escolaridade Exigida</th>
+                                    <th class="p-3 border">Plano de Correção / Justificativa</th>
+                                </tr>
+                            </thead>
+                            <tbody>${linhas}</tbody>
+                        </table>
+                    </div>
+                `;
+            }
+            else if(chave === "Anexo II" || chave.includes("Divergência") || chave.includes("Anexo II -")) {
+                let linhas = dadosTabelas["Anexo II"].map(i => `
+                    <tr class="bg-white border-b border-slate-100 hover:bg-slate-50">
+                        <td class="p-3 border-r text-center font-mono">${i.cod}</td>
+                        <td class="p-3 border-r font-bold text-slate-700">${i.cargo}</td>
+                        <td class="p-3 border-r text-center">${i.providas}</td>
+                        <td class="p-3 border-r text-center">${i.lotacoes}</td>
+                        <td class="p-3 border-r text-center text-rose-600 font-bold">${i.dif}</td>
+                        <td class="p-3 text-[11px] text-slate-400 text-center">-</td>
+                    </tr>
+                `).join('');
+
+                htmlInner = `
+                    <div class="bg-slate-100 px-5 py-4 border-b flex justify-between items-center gap-2">
+                        <h3 class="text-sm font-bold text-slate-800 uppercase">Anexo II - Divergências de Quadro (Vagas x Lotação)</h3>
+                    </div>
+                    <div class="overflow-x-auto p-4 bg-white">
+                        <table class="w-full text-left border-collapse border min-w-[900px] text-xs">
+                            <thead class="bg-slate-800 text-white text-[10px] uppercase">
+                                <tr>
+                                    <th class="p-3 border w-20 text-center">Cód. Cargo</th>
+                                    <th class="p-3 border w-48">Cargo</th>
+                                    <th class="p-3 border w-24 text-center">Vagas Providas</th>
+                                    <th class="p-3 border w-24 text-center">Lotações Reais</th>
+                                    <th class="p-3 border w-24 text-center text-rose-500">Diferença</th>
+                                    <th class="p-3 border">Justificativa da Divergência</th>
+                                </tr>
+                            </thead>
+                            <tbody>${linhas}</tbody>
+                        </table>
+                    </div>
+                `;
+            }
+            else if(chave === "Anexo I" || chave.includes("Empenhos") || chave.includes("Anexo I -")) {
+                let linhas = dadosTabelas["Anexo I"].map(i => `
+                    <tr class="bg-white border-b border-slate-100 hover:bg-slate-50">
+                        <td class="p-3 border-r text-slate-600 font-bold text-center">${i.emp}</td>
+                        <td class="p-3 border-r text-slate-700 truncate max-w-[200px]" title="${i.credor}">${i.credor} <br><span class="text-[9px] text-slate-400 uppercase font-normal">${i.mod}</span></td>
+                        <td class="p-3 border-r text-slate-600 text-[11px]">${i.hist}</td>
+                        <td class="p-3 border-r text-center text-slate-500 whitespace-nowrap">${i.data}</td>
+                        <td class="p-3 border-r text-right font-medium text-slate-700 whitespace-nowrap">R$ ${i.valorPago}</td>
+                        <td class="p-3 text-[11px] text-slate-400 text-center">-</td>
+                    </tr>
+                `).join('');
+
+                htmlInner = `
+                    <div class="bg-slate-100 px-5 py-4 border-b flex justify-between items-center gap-2">
+                        <h3 class="text-sm font-bold text-slate-800 uppercase">Anexo I - Amostra de Empenhos (53 Registros)</h3>
+                    </div>
+                    <div class="overflow-x-auto p-4 bg-white">
+                        <table class="w-full text-left border-collapse border min-w-[900px] text-xs">
+                            <thead class="bg-slate-800 text-white text-[10px] uppercase">
+                                <tr>
+                                    <th class="p-3 border w-20 text-center">Empenho</th>
+                                    <th class="p-3 border w-56">Credor / Modalidade</th>
+                                    <th class="p-3 border w-48">Histórico Resumido</th>
+                                    <th class="p-3 border w-24 text-center">Data Emissão</th>
+                                    <th class="p-3 border w-28 text-right">Valor Pago</th>
+                                    <th class="p-3 border w-64">Justificativa da Despesa / Objeto</th>
+                                </tr>
+                            </thead>
+                            <tbody>${linhas}</tbody>
+                        </table>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = htmlInner;
+        }
+
+        // ==========================================
+        // 7. DASHBOARDS
+        // ==========================================
+        let chartSecretariasInstance = null;
+
+        function abrirDetalhesKpi(tipo) {
+            const filtroSec = document.getElementById('filtro-secretaria').value;
+            let itens = bancoDeDados;
+
+            if (filtroSec !== 'TODAS') {
+                itens = itens.filter(i => i.secretaria === filtroSec);
+            }
+
+            let titulo = '';
+            let itensFiltrados = [];
+
+            if (tipo === 'total') {
+                titulo = 'Todos os Requisitos';
+                itensFiltrados = itens;
+            } else if (tipo === 'concluido' || tipo === 'progresso') {
+                titulo = 'Requisitos Concluídos';
+                itensFiltrados = itens.filter(i => i.status === 'Concluido');
+            } else if (tipo === 'pendente') {
+                titulo = 'Ação Imediata - Pendentes';
+                itensFiltrados = itens.filter(i => i.status !== 'Concluido');
+            }
+
+            if (itensFiltrados.length === 0) {
+                Swal.fire('Vazio', 'Não existem dados correspondentes a este filtro.', 'info');
+                return;
+            }
+
+            let linhasHtml = itensFiltrados.map(item => `
+                <tr class="border-b border-slate-100 text-left text-xs hover:bg-slate-50 transition-colors">
+                    <td class="p-2 font-bold text-slate-500 w-16 text-center">${item.id}</td>
+                    <td class="p-2 text-slate-700 font-medium pr-4 leading-tight">${item.desc}</td>
+                    <td class="p-2 text-center w-28">
+                        ${item.status === 'Concluido' 
+                            ? '<span class="bg-green-100 text-green-700 px-2 py-1 rounded text-[9px] uppercase font-bold"><i class="fa-solid fa-check"></i> Concluído</span>' 
+                            : '<span class="bg-rose-100 text-rose-700 px-2 py-1 rounded text-[9px] uppercase font-bold">Pendente</span>'}
+                    </td>
+                    <td class="p-2 text-[9px] font-bold text-slate-400 text-center uppercase w-28">${item.secretaria}</td>
+                </tr>
+            `).join('');
+
+            let htmlTabela = `
+                <div class="max-h-[60vh] overflow-y-auto mt-4 border border-slate-200 rounded-lg shadow-inner">
+                    <table class="w-full text-left border-collapse">
+                        <thead class="bg-slate-800 text-[10px] uppercase text-white sticky top-0 z-10 shadow-sm">
+                            <tr>
+                                <th class="p-3 text-center">Nº</th>
+                                <th class="p-3">Objeto de Entrega (TCE)</th>
+                                <th class="p-3 text-center">Status</th>
+                                <th class="p-3 text-center">Secretaria</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${linhasHtml}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            Swal.fire({
+                title: `<div class="flex items-center gap-3 text-slate-800"><i class="fa-solid fa-table-list text-blue-600 text-xl"></i> <span class="text-sm md:text-lg uppercase tracking-wider font-black">${titulo}</span></div>`,
+                html: htmlTabela,
+                width: '800px',
+                showConfirmButton: true,
+                confirmButtonText: 'Fechar Janela',
+                confirmButtonColor: '#0f172a',
+                customClass: { container: 'font-sans' }
+            });
+        }
+
+        function renderDashboards() {
+            const filtroSec = document.getElementById('filtro-secretaria').value;
+            let itensRegulares = bancoDeDados; 
+            
+            if (filtroSec !== 'TODAS') {
+                itensRegulares = itensRegulares.filter(i => i.secretaria === filtroSec);
+            }
+
+            const total = itensRegulares.length;
+            const concluidos = itensRegulares.filter(i => i.status === 'Concluido').length;
+            const pendentes = itensRegulares.filter(i => i.status === 'Pendente').length;
+
+            const perc = total > 0 ? Math.round((concluidos / total) * 100) : 0;
+
+            document.getElementById('kpi-total').innerText = total;
+            document.getElementById('kpi-concluido').innerText = concluidos;
+            document.getElementById('kpi-pendente').innerText = pendentes;
+            
+            document.getElementById('kpi-progress-bar').style.width = perc + '%';
+            document.getElementById('kpi-progress-text').innerText = perc + '% Concluído';
+
+            const eixos = [...new Set(itensRegulares.map(item => item.eixo))];
+            const divMenus = document.getElementById('progress-menus');
+            divMenus.innerHTML = '';
+
+            eixos.forEach(eixo => {
+                const itensEixo = itensRegulares.filter(i => i.eixo === eixo);
+                const conclEixo = itensEixo.filter(i => i.status === 'Concluido').length;
+                const percEixo = Math.round((conclEixo / itensEixo.length) * 100) || 0;
+
+                divMenus.innerHTML += `
+                    <div>
+                        <div class="flex justify-between text-[10px] md:text-[11px] font-bold uppercase mb-1">
+                            <span class="text-slate-600 truncate mr-2">${eixo}</span>
+                            <span class="${percEixo === 100 ? 'text-green-600' : 'text-blue-600'}">${percEixo}%</span>
+                        </div>
+                        <div class="w-full bg-slate-100 rounded-full h-1.5">
+                            <div class="${percEixo === 100 ? 'bg-green-500' : 'bg-blue-500'} h-1.5 rounded-full transition-all duration-500" style="width: ${percEixo}%"></div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            const ctx = document.getElementById('chart-secretarias').getContext('2d');
+            const contagemSec = {};
+            itensRegulares.forEach(i => {
+                if(i.status !== 'Concluido') {
+                    contagemSec[i.secretaria] = (contagemSec[i.secretaria] || 0) + 1;
+                }
+            });
+
+            const labels = Object.keys(contagemSec);
+            const dataVal = Object.values(contagemSec);
+            const colors = labels.map(sec => {
+                const mapColors = { "CASA_CIVIL": "#334155", "FINANCAS": "#059669", "RH": "#2563eb", "EDUCACAO": "#f59e0b", "SAUDE": "#14b8a6", "JURIDICO": "#4f46e5" };
+                return mapColors[sec] || "#cbd5e1";
+            });
+
+            if (chartSecretariasInstance) chartSecretariasInstance.destroy();
+
+            chartSecretariasInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Itens Pendentes',
+                        data: dataVal,
+                        backgroundColor: colors,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, ticks: { stepSize: 1, font: {size: 10} } },
+                        x: { ticks: { font: {size: 9, weight: 'bold'} } }
+                    }
+                }
+            });
+        }
+
+        function aplicarFiltroSecretaria() {
+            if (document.getElementById('sec-checklist').classList.contains('active') && currentSubmenu) {
+                renderChecklist(currentSubmenu);
+            }
+            renderDashboards();
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.classList.contains('w-72')) {
+                sidebar.classList.replace('w-72', 'w-0');
+            } else {
+                sidebar.classList.replace('w-0', 'w-72');
+            }
+        }
+
+        function fecharSidebarMobile() {
+            if (window.innerWidth < 768) {
+                const sidebar = document.getElementById('sidebar');
+                if(sidebar.classList.contains('w-72')) {
+                    sidebar.classList.replace('w-72', 'w-0');
+                }
+            }
+        }
+
+        window.onload = function() {
+            renderMenu();
+            showDashboard();
+            if (window.innerWidth < 768) {
+                document.getElementById('sidebar').classList.replace('w-72', 'w-0');
+            }
+        };
+    </script>
+</body>
+</html>
